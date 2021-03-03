@@ -65,7 +65,7 @@ public class PersonBuilder {
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
+    public PersonBuilder withTags(String... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
@@ -85,6 +85,7 @@ public class PersonBuilder {
         this.phone = new Phone(phone);
         return this;
     }
+
     /**
      * Sets the {@code Remark} of the {@code Person} that we are building.
      */
@@ -92,6 +93,7 @@ public class PersonBuilder {
         this.remark = new Remark(remark);
         return this;
     }
+
     /**
      * Sets the {@code Email} of the {@code Person} that we are building.
      */

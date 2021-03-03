@@ -11,6 +11,7 @@ public class Remark {
 
     /**
      * Constructor for Remark
+     *
      * @param remark The remark.
      */
     public Remark(String remark) {
