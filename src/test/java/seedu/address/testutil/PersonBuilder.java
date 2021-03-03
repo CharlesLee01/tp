@@ -102,6 +102,9 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Creates a person object.
+     */
     public Person build() {
         return new Person(name, phone, email, address, remark, tags);
 
