@@ -6,10 +6,9 @@ public abstract class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the owner/dog/program identified by the index number used in the displayed entity list.\n"
+            + ": Deletes the owner/dog/program identified by the index number used in the displayed owner list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " owner 1\n"
-            + "Example: " + COMMAND_WORD + " dog 1";
+            + "Example: " + COMMAND_WORD + " owner 1";
 
     public static final String MESSAGE_DELETE_SUCCESS_FORMAT = "Deleted %s: ";
 
