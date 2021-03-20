@@ -66,11 +66,6 @@ public class Owner extends Entity {
     }
 
     @Override
-    public String[] getOtherProperties() {
-        return new String[] {phone.value, address.value, email.value};
-    }
-
-    @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(name, phone, email, address, tags);
