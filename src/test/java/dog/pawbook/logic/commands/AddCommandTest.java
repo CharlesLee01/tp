@@ -25,7 +25,7 @@ import dog.pawbook.testutil.OwnerBuilder;
 import javafx.collections.ObservableList;
 import javafx.util.Pair;
 
-public class AddOwnerCommandTest {
+public class AddCommandTest {
 
     @Test
     public void constructor_nullOwner_throwsNullPointerException() {
