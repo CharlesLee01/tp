@@ -120,7 +120,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook<Owner> getAddressBook() {
+        public ReadOnlyAddressBook getAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -187,7 +187,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook<Owner> getAddressBook() {
+        public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
         }
     }

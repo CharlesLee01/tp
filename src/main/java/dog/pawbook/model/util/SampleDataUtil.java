@@ -43,7 +43,7 @@ public class SampleDataUtil {
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Owner sampleOwner : getSampleOwners()) {
-            sampleAb.addEntity(sampleOwner);
+            sampleAb.addOwner(sampleOwner);
         }
         return sampleAb;
     }

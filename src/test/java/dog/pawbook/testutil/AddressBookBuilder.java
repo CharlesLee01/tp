@@ -24,7 +24,7 @@ public class AddressBookBuilder {
      * Adds a new {@code Owner} to the {@code AddressBook} that we are building.
      */
     public AddressBookBuilder withOwner(Owner owner) {
-        addressBook.addEntity(owner);
+        addressBook.addOwner(owner);
         return this;
     }
 
