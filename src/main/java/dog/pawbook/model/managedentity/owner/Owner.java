@@ -2,8 +2,6 @@ package dog.pawbook.model.managedentity.owner;
 
 import static dog.pawbook.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
@@ -16,8 +14,6 @@ import dog.pawbook.model.managedentity.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Owner extends Entity {
-    public static final String ENTITY_WORD = "owner";
-
     // Identity fields
     private final Phone phone;
     private final Email email;
@@ -70,7 +66,7 @@ public class Owner extends Entity {
     }
 
     @Override
-    public String[] getOtherPropertiesAsString() {
+    public String[] getOtherProperties() {
         return new String[] {phone.value, address.value, email.value};
     }
 
@@ -99,14 +95,4 @@ public class Owner extends Entity {
         return builder.toString();
     }
 
-    @Override
-    public Map<String, String> getOtherPropertiesAsDict() {
-        Map<String, String> dict = new HashMap<>();
-        dict.put("type", "owner");
-        dict.put(Phone.class.getSimpleName(), phone.value);
-        dict.put(Email.class.getSimpleName(), email.value);
-        dict.put(Address.class.getSimpleName(), address.value);
-
-        return dict;
-    }
 }

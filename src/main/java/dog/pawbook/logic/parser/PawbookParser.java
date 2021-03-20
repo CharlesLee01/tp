@@ -17,7 +17,6 @@ import dog.pawbook.logic.commands.DeleteOwnerCommand;
 import dog.pawbook.logic.commands.ExitCommand;
 import dog.pawbook.logic.commands.HelpCommand;
 import dog.pawbook.logic.parser.exceptions.ParseException;
-import dog.pawbook.model.managedentity.owner.Owner;
 
 /**
  * Parses user input.
@@ -74,7 +73,7 @@ public class PawbookParser {
         }
 
         switch (entityType) {
-        case Owner.ENTITY_WORD:
+        case AddOwnerCommand.ENTITY_WORD:
             return new AddOwnerCommandParser().parse(arguments);
         case AddDogCommand.ENTITY_WORD:
             return new AddDogCommandParser().parse(arguments);

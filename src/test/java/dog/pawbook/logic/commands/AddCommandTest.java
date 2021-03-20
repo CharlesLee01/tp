@@ -19,7 +19,6 @@ import dog.pawbook.model.AddressBook;
 import dog.pawbook.model.Model;
 import dog.pawbook.model.ReadOnlyAddressBook;
 import dog.pawbook.model.ReadOnlyUserPrefs;
-import dog.pawbook.model.managedentity.Entity;
 import dog.pawbook.model.managedentity.owner.Owner;
 import dog.pawbook.testutil.OwnerBuilder;
 import javafx.collections.ObservableList;
@@ -33,13 +32,13 @@ public class AddCommandTest {
 
     @Test
     public void execute_ownerAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingEntityAdded modelStub = new ModelStubAcceptingEntityAdded();
+        ModelStubAcceptingOwnerAdded modelStub = new ModelStubAcceptingOwnerAdded();
         Owner validOwner = new OwnerBuilder().build();
 
         CommandResult commandResult = new AddOwnerCommand(validOwner).execute(modelStub);
 
         assertEquals(AddOwnerCommand.MESSAGE_SUCCESS + validOwner, commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validOwner), modelStub.entitiesAdded);
+        assertEquals(Arrays.asList(validOwner), modelStub.ownersAdded);
     }
 
     @Test
@@ -111,7 +110,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addEntity(Entity entity) {
+        public void addOwner(Owner owner) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -121,32 +120,32 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyAddressBook<Owner> getAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean hasEntity(Entity entity) {
+        public boolean hasOwner(Owner owner) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deleteEntity(Entity target) {
+        public void deleteOwner(Owner target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setEntity(Entity target, Entity editedEntity) {
+        public void setOwner(Owner target, Owner editedOwner) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Entity> getFilteredEntityList() {
+        public ObservableList<Owner> getFilteredOwnerList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredEntityList(Predicate<Entity> predicate) {
+        public void updateFilteredOwnerList(Predicate<Owner> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -163,32 +162,32 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasEntity(Entity entity) {
-            requireNonNull(entity);
-            return this.owner.isSameEntity(entity);
+        public boolean hasOwner(Owner owner) {
+            requireNonNull(owner);
+            return this.owner.isSameEntity(owner);
         }
     }
 
     /**
      * A Model stub that always accept the owner being added.
      */
-    private class ModelStubAcceptingEntityAdded extends ModelStub {
-        final ArrayList<Entity> entitiesAdded = new ArrayList<>();
+    private class ModelStubAcceptingOwnerAdded extends ModelStub {
+        final ArrayList<Owner> ownersAdded = new ArrayList<>();
 
         @Override
-        public boolean hasEntity(Entity entity) {
-            requireNonNull(entity);
-            return entitiesAdded.stream().anyMatch(entity::isSameEntity);
+        public boolean hasOwner(Owner owner) {
+            requireNonNull(owner);
+            return ownersAdded.stream().anyMatch(owner::isSameEntity);
         }
 
         @Override
-        public void addEntity(Entity entity) {
-            requireNonNull(entity);
-            entitiesAdded.add(entity);
+        public void addOwner(Owner owner) {
+            requireNonNull(owner);
+            ownersAdded.add(owner);
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyAddressBook<Owner> getAddressBook() {
             return new AddressBook();
         }
     }

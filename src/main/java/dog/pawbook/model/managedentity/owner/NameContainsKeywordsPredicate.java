@@ -4,12 +4,11 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import dog.pawbook.commons.util.StringUtil;
-import dog.pawbook.model.managedentity.Entity;
 
 /**
  * Tests that a {@code Owner}'s {@code Name} matches any of the keywords given.
  */
-public class NameContainsKeywordsPredicate implements Predicate<Entity> {
+public class NameContainsKeywordsPredicate implements Predicate<Owner> {
     private final List<String> keywords;
 
     public NameContainsKeywordsPredicate(List<String> keywords) {
@@ -17,9 +16,9 @@ public class NameContainsKeywordsPredicate implements Predicate<Entity> {
     }
 
     @Override
-    public boolean test(Entity entity) {
+    public boolean test(Owner owner) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(entity.getName().fullName, keyword));
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(owner.getName().fullName, keyword));
     }
 
     @Override

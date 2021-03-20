@@ -8,7 +8,7 @@ import dog.pawbook.commons.core.Messages;
 import dog.pawbook.commons.core.index.Index;
 import dog.pawbook.logic.commands.exceptions.CommandException;
 import dog.pawbook.model.Model;
-import dog.pawbook.model.managedentity.Entity;
+import dog.pawbook.model.managedentity.owner.Owner;
 
 /**
  * Deletes a owner identified using it's displayed index from the address book.
@@ -31,14 +31,14 @@ public class DeleteOwnerCommand extends DeleteCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Entity> lastShownList = model.getFilteredEntityList();
+        List<Owner> lastShownList = model.getFilteredOwnerList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_OWNER_DISPLAYED_INDEX);
         }
 
-        Entity ownerToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deleteEntity(ownerToDelete);
+        Owner ownerToDelete = lastShownList.get(targetIndex.getZeroBased());
+        model.deleteOwner(ownerToDelete);
         return new CommandResult(MESSAGE_SUCCESS + ownerToDelete);
     }
 

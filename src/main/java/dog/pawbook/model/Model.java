@@ -4,7 +4,7 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 
 import dog.pawbook.commons.core.GuiSettings;
-import dog.pawbook.model.managedentity.Entity;
+import dog.pawbook.model.managedentity.owner.Owner;
 import javafx.collections.ObservableList;
 
 /**
@@ -12,7 +12,7 @@ import javafx.collections.ObservableList;
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Entity> PREDICATE_SHOW_ALL_ENTITIES = unused -> true;
+    Predicate<Owner> PREDICATE_SHOW_ALL_OWNERS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -49,43 +49,40 @@ public interface Model {
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
-    /**
-     * Returns the AddressBook
-     */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the AddressBook */
+    ReadOnlyAddressBook<Owner> getAddressBook();
 
     /**
      * Returns true if a owner with the same identity as {@code owner} exists in the address book.
      */
-    boolean hasEntity(Entity entity);
+    boolean hasOwner(Owner owner);
 
     /**
      * Deletes the given owner.
      * The owner must exist in the address book.
+     * @param target
      */
-    void deleteEntity(Entity target);
+    void deleteOwner(Owner target);
 
     /**
      * Adds the given owner.
      * {@code owner} must not already exist in the address book.
      */
-    void addEntity(Entity entity);
+    void addOwner(Owner owner);
 
     /**
      * Replaces the given owner {@code target} with {@code editedOwner}.
      * {@code target} must exist in the address book.
      * The owner identity of {@code editedOwner} must not be the same as another existing owner in the address book.
      */
-    void setEntity(Entity target, Entity editedEntity);
+    void setOwner(Owner target, Owner editedOwner);
 
-    /**
-     * Returns an unmodifiable view of the filtered owner list
-     */
-    ObservableList<Entity> getFilteredEntityList();
+    /** Returns an unmodifiable view of the filtered owner list */
+    ObservableList<Owner> getFilteredOwnerList();
 
     /**
      * Updates the filter of the filtered owner list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredEntityList(Predicate<Entity> predicate);
+    void updateFilteredOwnerList(Predicate<Owner> predicate);
 }

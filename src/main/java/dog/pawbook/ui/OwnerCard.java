@@ -2,7 +2,7 @@ package dog.pawbook.ui;
 
 import java.util.Comparator;
 
-import dog.pawbook.model.managedentity.Entity;
+import dog.pawbook.model.managedentity.owner.Owner;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -13,7 +13,7 @@ import javafx.scene.layout.VBox;
 /**
  * An UI component that displays information of a {@code Owner}.
  */
-public class EntityCard extends UiPart<Region> {
+public class OwnerCard extends UiPart<Region> {
 
     private static final String FXML = "OwnerListCard.fxml";
 
@@ -25,7 +25,7 @@ public class EntityCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Entity entity;
+    public final Owner owner;
 
     @FXML
     private VBox contentPane;
@@ -41,21 +41,21 @@ public class EntityCard extends UiPart<Region> {
     /**
      * Creates a {@code OwnerCode} with the given {@code Owner} and index to display.
      */
-    public EntityCard(Entity entity, int displayedIndex) {
+    public OwnerCard(Owner owner, int displayedIndex) {
         super(FXML);
-        this.entity = entity;
+        this.owner = owner;
         id.setText(displayedIndex + ". ");
-        name.setText(entity.getName().fullName);
+        name.setText(owner.getName().fullName);
 
         // todo: extract a method for this and use stream like tags
-        String[] properties = entity.getOtherPropertiesAsString();
+        String[] properties = owner.getOtherProperties();
         for (String property : properties) {
             Label propertyLabel = new Label(property);
             propertyLabel.getStyleClass().add("cell_small_label");
             contentPane.getChildren().add(propertyLabel);
         }
 
-        entity.getTags().stream()
+        owner.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
@@ -68,13 +68,13 @@ public class EntityCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EntityCard)) {
+        if (!(other instanceof OwnerCard)) {
             return false;
         }
 
         // state check
-        EntityCard card = (EntityCard) other;
+        OwnerCard card = (OwnerCard) other;
         return id.getText().equals(card.id.getText())
-                && entity.equals(card.entity);
+                && owner.equals(card.owner);
     }
 }

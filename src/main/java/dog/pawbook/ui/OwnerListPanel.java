@@ -3,7 +3,7 @@ package dog.pawbook.ui;
 import java.util.logging.Logger;
 
 import dog.pawbook.commons.core.LogsCenter;
-import dog.pawbook.model.managedentity.Entity;
+import dog.pawbook.model.managedentity.owner.Owner;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -13,35 +13,35 @@ import javafx.scene.layout.Region;
 /**
  * Panel containing the list of owners.
  */
-public class EntityListPanel extends UiPart<Region> {
+public class OwnerListPanel extends UiPart<Region> {
     private static final String FXML = "OwnerListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(EntityListPanel.class);
+    private final Logger logger = LogsCenter.getLogger(OwnerListPanel.class);
 
     @FXML
-    private ListView<Entity> entityListView;
+    private ListView<Owner> ownerListView;
 
     /**
      * Creates a {@code OwnerListPanel} with the given {@code ObservableList}.
      */
-    public EntityListPanel(ObservableList<Entity> entityList) {
+    public OwnerListPanel(ObservableList<Owner> ownerList) {
         super(FXML);
-        entityListView.setItems(entityList);
-        entityListView.setCellFactory(listView -> new EntityListViewCell());
+        ownerListView.setItems(ownerList);
+        ownerListView.setCellFactory(listView -> new OwnerListViewCell());
     }
 
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Owner} using a {@code OwnerCard}.
      */
-    class EntityListViewCell extends ListCell<Entity> {
+    class OwnerListViewCell extends ListCell<Owner> {
         @Override
-        protected void updateItem(Entity entity, boolean empty) {
-            super.updateItem(entity, empty);
+        protected void updateItem(Owner owner, boolean empty) {
+            super.updateItem(owner, empty);
 
-            if (empty || entity == null) {
+            if (empty || owner == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new EntityCard(entity, getIndex() + 1).getRoot());
+                setGraphic(new OwnerCard(owner, getIndex() + 1).getRoot());
             }
         }
     }

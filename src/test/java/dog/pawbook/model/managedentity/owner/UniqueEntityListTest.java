@@ -15,7 +15,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import dog.pawbook.model.managedentity.Entity;
 import dog.pawbook.model.managedentity.owner.exceptions.DuplicateOwnerException;
 import dog.pawbook.model.managedentity.owner.exceptions.OwnerNotFoundException;
 import dog.pawbook.testutil.OwnerBuilder;
@@ -144,14 +143,14 @@ public class UniqueEntityListTest {
 
     @Test
     public void setOwners_nullList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueEntityList.setEntities((List<Entity>) null));
+        assertThrows(NullPointerException.class, () -> uniqueEntityList.setEntities((List<Owner>) null));
     }
 
     @Test
     public void setOwners_list_replacesOwnListWithProvidedList() {
         uniqueEntityList.add(ALICE);
-        List<Entity> entityList = Collections.singletonList(BOB);
-        uniqueEntityList.setEntities(entityList);
+        List<Owner> ownerList = Collections.singletonList(BOB);
+        uniqueEntityList.setEntities(ownerList);
         UniqueEntityList expectedUniqueOwnerList = new UniqueEntityList();
         expectedUniqueOwnerList.add(BOB);
         assertEquals(expectedUniqueOwnerList, uniqueEntityList);
@@ -159,8 +158,8 @@ public class UniqueEntityListTest {
 
     @Test
     public void setOwners_listWithDuplicateOwners_throwsDuplicateOwnerException() {
-        List<Entity> listWithDuplicateEntities = Arrays.asList(ALICE, ALICE);
-        assertThrows(DuplicateOwnerException.class, () -> uniqueEntityList.setEntities(listWithDuplicateEntities));
+        List<Owner> listWithDuplicateOwners = Arrays.asList(ALICE, ALICE);
+        assertThrows(DuplicateOwnerException.class, () -> uniqueEntityList.setEntities(listWithDuplicateOwners));
     }
 
     @Test

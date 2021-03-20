@@ -16,7 +16,7 @@ import dog.pawbook.commons.core.index.Index;
 import dog.pawbook.model.Model;
 import dog.pawbook.model.ModelManager;
 import dog.pawbook.model.UserPrefs;
-import dog.pawbook.model.managedentity.Entity;
+import dog.pawbook.model.managedentity.owner.Owner;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -28,20 +28,20 @@ public class DeleteOwnerCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Entity entityToDelete = model.getFilteredEntityList().get(INDEX_FIRST_OWNER.getZeroBased());
+        Owner ownerToDelete = model.getFilteredOwnerList().get(INDEX_FIRST_OWNER.getZeroBased());
         DeleteOwnerCommand deleteOwnerCommand = new DeleteOwnerCommand(INDEX_FIRST_OWNER);
 
-        String expectedMessage = DeleteOwnerCommand.MESSAGE_SUCCESS + entityToDelete;
+        String expectedMessage = DeleteOwnerCommand.MESSAGE_SUCCESS + ownerToDelete;
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deleteEntity(entityToDelete);
+        expectedModel.deleteOwner(ownerToDelete);
 
         assertCommandSuccess(deleteOwnerCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredEntityList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredOwnerList().size() + 1);
         DeleteOwnerCommand deleteOwnerCommand = new DeleteOwnerCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteOwnerCommand, model, Messages.MESSAGE_INVALID_OWNER_DISPLAYED_INDEX);
@@ -51,13 +51,13 @@ public class DeleteOwnerCommandTest {
     public void execute_validIndexFilteredList_success() {
         showOwnerAtIndex(model, INDEX_FIRST_OWNER);
 
-        Entity entityToDelete = model.getFilteredEntityList().get(INDEX_FIRST_OWNER.getZeroBased());
+        Owner ownerToDelete = model.getFilteredOwnerList().get(INDEX_FIRST_OWNER.getZeroBased());
         DeleteOwnerCommand deleteOwnerCommand = new DeleteOwnerCommand(INDEX_FIRST_OWNER);
 
-        String expectedMessage = DeleteOwnerCommand.MESSAGE_SUCCESS + entityToDelete;
+        String expectedMessage = DeleteOwnerCommand.MESSAGE_SUCCESS + ownerToDelete;
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deleteEntity(entityToDelete);
+        expectedModel.deleteOwner(ownerToDelete);
         showNoOwner(expectedModel);
 
         assertCommandSuccess(deleteOwnerCommand, model, expectedMessage, expectedModel);
@@ -102,8 +102,8 @@ public class DeleteOwnerCommandTest {
      * Updates {@code model}'s filtered list to show no one.
      */
     private void showNoOwner(Model model) {
-        model.updateFilteredEntityList(p -> false);
+        model.updateFilteredOwnerList(p -> false);
 
-        assertTrue(model.getFilteredEntityList().isEmpty());
+        assertTrue(model.getFilteredOwnerList().isEmpty());
     }
 }
