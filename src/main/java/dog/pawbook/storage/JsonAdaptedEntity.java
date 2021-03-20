@@ -23,7 +23,6 @@ import dog.pawbook.model.managedentity.owner.Email;
 import dog.pawbook.model.managedentity.owner.Owner;
 import dog.pawbook.model.managedentity.owner.Phone;
 import dog.pawbook.model.managedentity.tag.Tag;
-import javafx.util.Pair;
 
 /**
  * Jackson-friendly version of {@link Entity}.
@@ -32,7 +31,6 @@ class JsonAdaptedEntity {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Entities' %s field is missing!";
 
-    private final int id;
     private final String name;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private final Map<String, String> propertyDict = new HashMap<>();
@@ -41,10 +39,9 @@ class JsonAdaptedEntity {
      * Constructs a {@code JsonAdaptedEntity} with the given owner details.
      */
     @JsonCreator
-    public JsonAdaptedEntity(@JsonProperty("id") Integer id, @JsonProperty("name") String name,
+    public JsonAdaptedEntity(@JsonProperty("name") String name,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
             @JsonProperty("propertyDict") Map<String, String> propertyDict) {
-        this.id = id;
         this.name = name;
         if (tagged != null) {
             this.tagged.addAll(tagged);
@@ -55,9 +52,7 @@ class JsonAdaptedEntity {
     /**
      * Converts a given {@code Entity} into this class for Jackson use.
      */
-    public JsonAdaptedEntity(Pair<Integer, Entity> idEntityPair) {
-        this.id = idEntityPair.getKey();
-        Entity source = idEntityPair.getValue();
+    public JsonAdaptedEntity(Entity source) {
         name = source.getName().fullName;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -70,11 +65,7 @@ class JsonAdaptedEntity {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted entity.
      */
-    public Pair<Integer, Entity> toModelType() throws IllegalValueException {
-        if (id < 1) {
-            throw new IllegalValueException("Invalid ID given!");
-        }
-
+    public Entity toModelType() throws IllegalValueException {
         final List<Tag> ownerTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
             ownerTags.add(tag.toModelType());
@@ -94,7 +85,6 @@ class JsonAdaptedEntity {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "type"));
         }
 
-        Entity model;
         // todo: add dog into this and also extract some methods (might want to make Phone, Email etc have common base)
         switch (propertyDict.get("type")) {
         case Owner.ENTITY_WORD:
@@ -131,8 +121,7 @@ class JsonAdaptedEntity {
             }
             final Address modelAddress = new Address(address);
 
-            model = new Owner(modelName, modelPhone, modelEmail, modelAddress, modelTags);
-            break;
+            return new Owner(modelName, modelPhone, modelEmail, modelAddress, modelTags);
 
         case Dog.ENTITY_WORD:
             if (propertyDict.get(Breed.class.getSimpleName()) == null) {
@@ -174,19 +163,16 @@ class JsonAdaptedEntity {
 
             String ownerId = propertyDict.get("owner_id");
             try {
-                Integer.parseInt(ownerId);
+                int x = Integer.parseInt(ownerId);
             } catch (NumberFormatException e) {
                 throw new IllegalValueException("Must be a valid integer referring to an existing owner!");
             }
             final int modelOwnerId = Integer.parseInt(ownerId);
 
-            model = new Dog(modelName, modelBreed, modelDob, modelSex, modelOwnerId, modelTags);
-            break;
+            return new Dog(modelName, modelBreed, modelDob, modelSex, modelOwnerId, modelTags);
 
         default:
             throw new IllegalValueException("Invalid entity type!");
         }
-
-        return new Pair<>(id, model);
     }
 }

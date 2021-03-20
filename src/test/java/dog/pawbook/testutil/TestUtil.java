@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 
 import dog.pawbook.commons.core.index.Index;
 import dog.pawbook.model.Model;
+import dog.pawbook.model.managedentity.owner.Owner;
 
 /**
  * A utility class for test cases.
@@ -43,5 +44,12 @@ public class TestUtil {
      */
     public static Index getLastIndex(Model model) {
         return Index.fromOneBased(model.getFilteredEntityList().size());
+    }
+
+    /**
+     * Returns the owner in the {@code model}'s owner list at {@code index}.
+     */
+    public static Owner getOwner(Model model, Index index) {
+        return (Owner) model.getFilteredEntityList().get(index.getZeroBased());
     }
 }

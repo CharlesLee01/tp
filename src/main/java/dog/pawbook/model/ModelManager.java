@@ -12,7 +12,6 @@ import dog.pawbook.commons.core.LogsCenter;
 import dog.pawbook.model.managedentity.Entity;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import javafx.util.Pair;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,7 +21,7 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Pair<Integer, Entity>> filteredOwners;
+    private final FilteredList<Entity> filteredOwners;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -96,13 +95,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasEntity(int id) {
-        return addressBook.hasEntity(id);
-    }
-
-    @Override
-    public void deleteEntity(int targetId) {
-        addressBook.removeEntity(targetId);
+    public void deleteEntity(Entity target) {
+        addressBook.removeEntity(target);
     }
 
     @Override
@@ -112,10 +106,10 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setEntity(int targetId, Entity editedEntity) {
-        requireAllNonNull(editedEntity);
+    public void setEntity(Entity target, Entity editedEntity) {
+        requireAllNonNull(target, editedEntity);
 
-        addressBook.setEntity(targetId, editedEntity);
+        addressBook.setEntity(target, editedEntity);
     }
 
     //=========== Filtered Owner List Accessors =============================================================
@@ -125,12 +119,12 @@ public class ModelManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Pair<Integer, Entity>> getFilteredEntityList() {
+    public ObservableList<Entity> getFilteredEntityList() {
         return filteredOwners;
     }
 
     @Override
-    public void updateFilteredEntityList(Predicate<Pair<Integer, Entity>> predicate) {
+    public void updateFilteredEntityList(Predicate<Entity> predicate) {
         requireNonNull(predicate);
         filteredOwners.setPredicate(predicate);
     }

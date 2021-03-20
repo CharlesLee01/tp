@@ -12,7 +12,6 @@ import dog.pawbook.commons.exceptions.IllegalValueException;
 import dog.pawbook.model.AddressBook;
 import dog.pawbook.model.ReadOnlyAddressBook;
 import dog.pawbook.model.managedentity.Entity;
-import javafx.util.Pair;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -49,11 +48,11 @@ class JsonSerializableAddressBook {
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
         for (JsonAdaptedEntity jsonAdaptedEntity : entities) {
-            Pair<Integer, Entity> idEntityPair = jsonAdaptedEntity.toModelType();
-            if (addressBook.hasEntity(idEntityPair.getValue())) {
+            Entity entity = jsonAdaptedEntity.toModelType();
+            if (addressBook.hasEntity(entity)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_OWNER);
             }
-            addressBook.addEntityWithId(idEntityPair.getValue(), idEntityPair.getKey());
+            addressBook.addEntity(entity);
         }
         return addressBook;
     }

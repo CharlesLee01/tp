@@ -16,10 +16,9 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import dog.pawbook.model.managedentity.Entity;
-import dog.pawbook.model.managedentity.owner.exceptions.DuplicateEntityException;
-import dog.pawbook.model.managedentity.owner.exceptions.EntityNotFoundException;
+import dog.pawbook.model.managedentity.owner.exceptions.DuplicateOwnerException;
+import dog.pawbook.model.managedentity.owner.exceptions.OwnerNotFoundException;
 import dog.pawbook.testutil.OwnerBuilder;
-import javafx.util.Pair;
 
 public class UniqueEntityListTest {
 
@@ -57,17 +56,58 @@ public class UniqueEntityListTest {
     @Test
     public void add_duplicateOwner_throwsDuplicateOwnerException() {
         uniqueEntityList.add(ALICE);
-        assertThrows(DuplicateEntityException.class, () -> uniqueEntityList.add(ALICE));
+        assertThrows(DuplicateOwnerException.class, () -> uniqueEntityList.add(ALICE));
+    }
+
+    @Test
+    public void setOwner_nullTargetOwner_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueEntityList.setEntity(null, ALICE));
     }
 
     @Test
     public void setOwner_nullEditedOwner_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueEntityList.setEntity(1, null));
+        assertThrows(NullPointerException.class, () -> uniqueEntityList.setEntity(ALICE, null));
     }
 
     @Test
     public void setOwner_targetOwnerNotInList_throwsOwnerNotFoundException() {
-        assertThrows(EntityNotFoundException.class, () -> uniqueEntityList.setEntity(1, ALICE));
+        assertThrows(OwnerNotFoundException.class, () -> uniqueEntityList.setEntity(ALICE, ALICE));
+    }
+
+    @Test
+    public void setOwner_editedOwnerIsSameOwner_success() {
+        uniqueEntityList.add(ALICE);
+        uniqueEntityList.setEntity(ALICE, ALICE);
+        UniqueEntityList expectedUniqueOwnerList = new UniqueEntityList();
+        expectedUniqueOwnerList.add(ALICE);
+        assertEquals(expectedUniqueOwnerList, uniqueEntityList);
+    }
+
+    @Test
+    public void setOwner_editedOwnerHasSameIdentity_success() {
+        uniqueEntityList.add(ALICE);
+        Owner editedAlice = new OwnerBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+                .build();
+        uniqueEntityList.setEntity(ALICE, editedAlice);
+        UniqueEntityList expectedUniqueOwnerList = new UniqueEntityList();
+        expectedUniqueOwnerList.add(editedAlice);
+        assertEquals(expectedUniqueOwnerList, uniqueEntityList);
+    }
+
+    @Test
+    public void setOwner_editedOwnerHasDifferentIdentity_success() {
+        uniqueEntityList.add(ALICE);
+        uniqueEntityList.setEntity(ALICE, BOB);
+        UniqueEntityList expectedUniqueOwnerList = new UniqueEntityList();
+        expectedUniqueOwnerList.add(BOB);
+        assertEquals(expectedUniqueOwnerList, uniqueEntityList);
+    }
+
+    @Test
+    public void setOwner_editedOwnerHasNonUniqueIdentity_throwsDuplicateOwnerException() {
+        uniqueEntityList.add(ALICE);
+        uniqueEntityList.add(BOB);
+        assertThrows(DuplicateOwnerException.class, () -> uniqueEntityList.setEntity(ALICE, BOB));
     }
 
     @Test
@@ -77,7 +117,7 @@ public class UniqueEntityListTest {
 
     @Test
     public void remove_ownerDoesNotExist_throwsOwnerNotFoundException() {
-        assertThrows(EntityNotFoundException.class, () -> uniqueEntityList.remove(ALICE));
+        assertThrows(OwnerNotFoundException.class, () -> uniqueEntityList.remove(ALICE));
     }
 
     @Test
@@ -104,14 +144,13 @@ public class UniqueEntityListTest {
 
     @Test
     public void setOwners_nullList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueEntityList
-                .setEntities((List<Pair<Integer, Entity>>) null));
+        assertThrows(NullPointerException.class, () -> uniqueEntityList.setEntities((List<Entity>) null));
     }
 
     @Test
     public void setOwners_list_replacesOwnListWithProvidedList() {
         uniqueEntityList.add(ALICE);
-        List<Pair<Integer, Entity>> entityList = Collections.singletonList(new Pair<>(1, BOB));
+        List<Entity> entityList = Collections.singletonList(BOB);
         uniqueEntityList.setEntities(entityList);
         UniqueEntityList expectedUniqueOwnerList = new UniqueEntityList();
         expectedUniqueOwnerList.add(BOB);
@@ -120,15 +159,13 @@ public class UniqueEntityListTest {
 
     @Test
     public void setOwners_listWithDuplicateOwners_throwsDuplicateOwnerException() {
-        List<Pair<Integer, Entity>> listWithDuplicateEntities =
-                Arrays.asList(new Pair<>(1, ALICE), new Pair<>(1, ALICE));
-        assertThrows(DuplicateEntityException.class, () -> uniqueEntityList.setEntities(listWithDuplicateEntities));
+        List<Entity> listWithDuplicateEntities = Arrays.asList(ALICE, ALICE);
+        assertThrows(DuplicateOwnerException.class, () -> uniqueEntityList.setEntities(listWithDuplicateEntities));
     }
 
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> uniqueEntityList
-                .asUnmodifiableObservableList()
-                .remove(0));
+        assertThrows(UnsupportedOperationException.class, ()
+            -> uniqueEntityList.asUnmodifiableObservableList().remove(0));
     }
 }

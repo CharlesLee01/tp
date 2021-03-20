@@ -39,7 +39,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_duplicateOwner_throwsCommandException() {
-        Entity entityInList = model.getAddressBook().getEntityList().get(0).getValue();
+        Entity entityInList = model.getAddressBook().getEntityList().get(0);
         assertCommandFailure(new AddOwnerCommand((Owner) entityInList), model, AddOwnerCommand.MESSAGE_DUPLICATE_OWNER);
     }
 
