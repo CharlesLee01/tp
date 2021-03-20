@@ -51,28 +51,28 @@ public class OwnerTest {
     @Test
     public void isSameOwner() {
         // same object -> returns true
-        assertTrue(ALICE.isSameEntity(ALICE));
+        assertTrue(ALICE.isSameOwner(ALICE));
 
         // null -> returns false
-        assertFalse(ALICE.isSameEntity(null));
+        assertFalse(ALICE.isSameOwner(null));
 
         // same name, all other attributes different -> returns true
         Owner editedAlice = new OwnerBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(ALICE.isSameEntity(editedAlice));
+        assertTrue(ALICE.isSameOwner(editedAlice));
 
         // different name, all other attributes same -> returns false
         editedAlice = new OwnerBuilder(ALICE).withName(VALID_NAME_BOB).build();
-        assertFalse(ALICE.isSameEntity(editedAlice));
+        assertFalse(ALICE.isSameOwner(editedAlice));
 
         // name differs in case, all other attributes same -> returns false
         Owner editedBob = new OwnerBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSameEntity(editedBob));
+        assertFalse(BOB.isSameOwner(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new OwnerBuilder(BOB).withName(nameWithTrailingSpaces).build();
-        assertFalse(BOB.isSameEntity(editedBob));
+        assertFalse(BOB.isSameOwner(editedBob));
     }
 
     @Test

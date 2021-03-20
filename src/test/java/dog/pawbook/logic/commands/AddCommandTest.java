@@ -164,7 +164,7 @@ public class AddCommandTest {
         @Override
         public boolean hasOwner(Owner owner) {
             requireNonNull(owner);
-            return this.owner.isSameEntity(owner);
+            return this.owner.isSameOwner(owner);
         }
     }
 
@@ -177,7 +177,7 @@ public class AddCommandTest {
         @Override
         public boolean hasOwner(Owner owner) {
             requireNonNull(owner);
-            return ownersAdded.stream().anyMatch(owner::isSameEntity);
+            return ownersAdded.stream().anyMatch(owner::isSameOwner);
         }
 
         @Override
