@@ -50,7 +50,6 @@ class JsonSerializableAddressBook {
         AddressBook addressBook = new AddressBook();
         for (JsonAdaptedEntity jsonAdaptedEntity : entities) {
             Pair<Integer, Entity> idEntityPair = jsonAdaptedEntity.toModelType();
-
             if (addressBook.hasEntity(idEntityPair.getValue())) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_OWNER);
             }
@@ -58,4 +57,5 @@ class JsonSerializableAddressBook {
         }
         return addressBook;
     }
+
 }
