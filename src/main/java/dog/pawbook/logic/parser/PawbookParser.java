@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 
 import dog.pawbook.logic.commands.AddCommand;
 import dog.pawbook.logic.commands.AddDogCommand;
+import dog.pawbook.logic.commands.AddOwnerCommand;
 import dog.pawbook.logic.commands.Command;
 import dog.pawbook.logic.commands.DeleteCommand;
 import dog.pawbook.logic.commands.DeleteDogCommand;
@@ -50,10 +51,10 @@ public class PawbookParser {
 
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
+        case AddOwnerCommand.COMMAND_WORD:
             return generateAddCommand(entityType, arguments);
 
-        case DeleteCommand.COMMAND_WORD:
+        case DeleteOwnerCommand.COMMAND_WORD:
             return generateDeleteCommand(entityType, arguments);
 
         case ExitCommand.COMMAND_WORD:
