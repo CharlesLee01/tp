@@ -5,13 +5,16 @@ import static dog.pawbook.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static dog.pawbook.logic.parser.CliSyntax.PREFIX_NAME;
 import static dog.pawbook.logic.parser.CliSyntax.PREFIX_PHONE;
 import static dog.pawbook.logic.parser.CliSyntax.PREFIX_TAG;
+import static java.util.Objects.requireNonNull;
 
+import dog.pawbook.logic.commands.exceptions.CommandException;
+import dog.pawbook.model.Model;
 import dog.pawbook.model.managedentity.owner.Owner;
 
 /**
  * Adds a owner to the address book.
  */
-public class AddOwnerCommand extends AddCommand<Owner> {
+public class AddOwnerCommand extends AddCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a owner to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
@@ -30,11 +33,14 @@ public class AddOwnerCommand extends AddCommand<Owner> {
     public static final String MESSAGE_SUCCESS = String.format(MESSAGE_SUCCESS_FORMAT, Owner.ENTITY_WORD);
     public static final String MESSAGE_DUPLICATE_OWNER = "This owner already exists in the address book";
 
+    private final Owner toAdd;
+
     /**
      * Creates an AddCommand to add the specified {@code Owner}
      */
     public AddOwnerCommand(Owner owner) {
-        super(owner);
+        requireNonNull(owner);
+        toAdd = owner;
     }
 
     @Override
@@ -45,12 +51,14 @@ public class AddOwnerCommand extends AddCommand<Owner> {
     }
 
     @Override
-    protected String getSuccessMessage() {
-        return MESSAGE_SUCCESS + toAdd;
-    }
+    public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
 
-    @Override
-    protected String getDuplicateMessage() {
-        return MESSAGE_DUPLICATE_OWNER;
+        if (model.hasEntity(toAdd)) {
+            throw new CommandException(AddOwnerCommand.MESSAGE_DUPLICATE_OWNER);
+        }
+
+        model.addEntity(toAdd);
+        return new CommandResult(AddOwnerCommand.MESSAGE_SUCCESS + toAdd);
     }
 }

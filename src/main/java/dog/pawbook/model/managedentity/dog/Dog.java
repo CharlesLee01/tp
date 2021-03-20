@@ -122,17 +122,16 @@ public class Dog extends Entity {
     @Override
     public Map<String, String> getOtherPropertiesAsDict() {
         Map<String, String> dict = new HashMap<>();
-        dict.put("type", ENTITY_WORD);
-        dict.put(Breed.class.getSimpleName(), breed.value);
-        dict.put(DateOfBirth.class.getSimpleName(), dob.value);
-        dict.put(Sex.class.getSimpleName(), sex.value);
-        dict.put("owner_id", String.valueOf(ownerID));
+        dict.put("type", "dog");
+        dict.put("breed", breed.value);
+        dict.put("dob", dob.value);
+        dict.put("sex", sex.value);
 
         return dict;
     }
 
     @Override
     public String[] getOtherPropertiesAsString() {
-        return new String[] {breed.value, dob.value, sex.value, "Owner ID: " + ownerID};
+        return new String[] {breed.value, dob.value, sex.value};
     }
 }

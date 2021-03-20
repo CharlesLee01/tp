@@ -165,7 +165,7 @@ public class ParserUtil {
     public static int parseOwnerId(String ownerID) {
         requireNonNull(ownerID);
         String trimmedOwnerId = ownerID.trim();
-        return Integer.parseInt(trimmedOwnerId);
+        return Integer.valueOf(trimmedOwnerId);
     }
 
     /**
@@ -179,5 +179,6 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
 
 }
