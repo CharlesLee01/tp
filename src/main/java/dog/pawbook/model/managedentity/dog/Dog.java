@@ -8,6 +8,7 @@ import java.util.Set;
 
 import dog.pawbook.model.managedentity.Entity;
 import dog.pawbook.model.managedentity.Name;
+import dog.pawbook.model.managedentity.owner.Owner;
 import dog.pawbook.model.managedentity.tag.Tag;
 
 
@@ -17,24 +18,29 @@ import dog.pawbook.model.managedentity.tag.Tag;
  */
 public class Dog extends Entity {
 
+    enum Sex {
+        MALE,
+        FEMALE
+    }
+
     //Identity Fields
     private final Breed breed;
     private final DateOfBirth dob;
     private final Sex sex;
 
     // Data fields
-    private final int ownerID;
+    private final Owner owner;
 
     /**
      * Every field must be present and not null.
      */
-    public Dog(Name name, Breed breed, DateOfBirth dob, Sex sex, int ownerID, Set<Tag> tags) {
+    public Dog(Name name, Breed breed, DateOfBirth dob, Sex sex, Owner owner, Set<Tag> tags) {
         super(name, tags);
-        requireAllNonNull(name, breed, dob, sex, ownerID, tags);
+        requireAllNonNull(name, breed, dob, sex, owner, tags);
         this.breed = breed;
         this.dob = dob;
         this.sex = sex;
-        this.ownerID = ownerID;
+        this.owner = owner;
     }
 
     public Name getName() {
@@ -54,8 +60,8 @@ public class Dog extends Entity {
         return dob;
     }
 
-    public int getOwnerId() {
-        return ownerID;
+    public Owner getOwner() {
+        return owner;
     }
 
     /**
@@ -91,7 +97,7 @@ public class Dog extends Entity {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, breed, dob, sex, ownerID, tags);
+        return Objects.hash(name, breed, dob, sex, owner, tags);
     }
 
     @Override
@@ -104,8 +110,8 @@ public class Dog extends Entity {
                 .append(getDob())
                 .append("; Sex: ")
                 .append(getSex())
-                .append("; OwnerID: ")
-                .append(getOwnerId());
+                .append("; Owner: ")
+                .append(getOwner());
 
 
         Set<Tag> tags = getTags();

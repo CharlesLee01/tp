@@ -9,7 +9,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import dog.pawbook.logic.commands.AddCommand;
-import dog.pawbook.logic.commands.AddDogCommand;
 import dog.pawbook.logic.commands.AddOwnerCommand;
 import dog.pawbook.logic.commands.Command;
 import dog.pawbook.logic.commands.DeleteCommand;
@@ -75,8 +74,6 @@ public class PawbookParser {
         switch (entityType) {
         case AddOwnerCommand.ENTITY_WORD:
             return new AddOwnerCommandParser().parse(arguments);
-        case AddDogCommand.ENTITY_WORD:
-            return new AddDogCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSGAE_UNKNOWN_ENTITY);
