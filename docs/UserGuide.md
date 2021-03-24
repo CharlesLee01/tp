@@ -79,6 +79,29 @@ Examples:
 3. Deletes the program with ID 3 in Pawbook.<br>
    Command: `delete program p/3`
 
+### Edit Command
+
+Edits a dog/owner/program from Pawbook.
+name, Set<Session> sessionSet, Set<Tag> tags
+Format:
+```
+edit dog d/<DOG ID> n/<NAME> b/<BREED> d/<DATEOFBIRTH> s/<SEX> o/<OWNERID> [t/TAGS]...
+edit owner o/<OWNER ID> n/<NAME> p/<PHONE> e/<EMAIL> a/<ADDRESS> [t/TAGS]...
+edit program o/<PROGRAM ID> n/<NAME> [s/SESSION]... [t/TAGS]...
+```
+
+- Edits the dog/owner/program with the given ID.
+- The ID must be a positive integer 1, 2, 3, ...
+- Only include the variables that need to be edited after the integer
+
+Examples:
+1. Edits the dog with ID 1 in Pawbook.<br>
+   Command: `edit dog 1 n/Bruce t/playful`
+2. Edits the owner with ID 2 in Pawbook.<br>
+   Command: `edit owner 2 p/12345678`
+3. Edits the program with ID 3 in Pawbook.<br>
+   Command: `edit program 3 t/learn`
+   
 ### List Command
 
 Shows a list of dogs in the specified category/program.
@@ -127,6 +150,7 @@ Action | Format
 --------|------------------
 **Add** | 1. `add dog n/DOGNAME b/BREED d/DATE OF BIRTH s/SEX o/OWNERID t/TAG`<br>2. `add  owner n/OWNERNAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]...`<br>3. `add  program n/NAME [s/DATE OF SESSION]... [t/tag]...`
 **Delete** | 1. `delete dog d/DOGID`<br>2. `delete owner o/OWNERID`<br>3. `delete program p/PROGRAMID`
+**Edit** | 1. `edit dog d/<DOG ID> n/<NAME> b/<BREED> d/<DATEOFBIRTH> s/<SEX> o/<OWNERID> [t/TAGS]...`<br>2. `edit owner o/<OWNER ID> n/<NAME> p/<PHONE> e/<EMAIL> a/<ADDRESS> [t/TAGS]...`3. `edit program o/<PROGRAM ID> n/<NAME> [s/SESSION]... [t/TAGS]...`
 **List** |`list n/NAME c/CLASS b/BREED t/TAG`
 **Help** | `help`
 **Exit** | `exit`
