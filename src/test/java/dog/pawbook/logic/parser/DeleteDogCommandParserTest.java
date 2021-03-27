@@ -22,7 +22,7 @@ public class DeleteDogCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "1", new DeleteDogCommand(ID_FIRST_DOG));
+        assertParseSuccess(parser, "1", new DeleteDogCommand(ID_FIRST_DOG - 1));
     }
 
     @Test
