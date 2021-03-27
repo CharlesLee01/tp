@@ -1,16 +1,21 @@
 package dog.pawbook.logic.commands;
 
-import static dog.pawbook.logic.commands.CommandTestUtil.*;
-import static dog.pawbook.testutil.TypicalIndexes.*;
-import static dog.pawbook.testutil.TypicalIndexes.ID_THIRD_DOG;
+import static dog.pawbook.logic.commands.CommandTestUtil.DESC_PROGRAM_1;
+import static dog.pawbook.logic.commands.CommandTestUtil.DESC_PROGRAM_2;
+import static dog.pawbook.logic.commands.CommandTestUtil.VALID_NAME_PROGRAM2;
+import static dog.pawbook.logic.commands.CommandTestUtil.VALID_SESSION_PROGRAM2;
+import static dog.pawbook.logic.commands.CommandTestUtil.VALID_TAG_PUPPIES;
+import static dog.pawbook.logic.commands.CommandTestUtil.assertCommandFailure;
+import static dog.pawbook.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static dog.pawbook.testutil.TypicalIndexes.ID_FIRST_PROGRAM;
+import static dog.pawbook.testutil.TypicalIndexes.ID_SECOND_PROGRAM;
+import static dog.pawbook.testutil.TypicalIndexes.ID_THIRD_OWNER;
+import static dog.pawbook.testutil.TypicalIndexes.ID_THIRD_PROGRAM;
 import static dog.pawbook.testutil.TypicalPrograms.getTypicalAddressBook;
 import static java.util.stream.Collectors.toList;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import dog.pawbook.model.managedentity.dog.Dog;
-import dog.pawbook.model.managedentity.owner.Owner;
-import dog.pawbook.testutil.*;
 import org.junit.jupiter.api.Test;
 
 import dog.pawbook.commons.core.Messages;
@@ -20,6 +25,8 @@ import dog.pawbook.model.Model;
 import dog.pawbook.model.ModelManager;
 import dog.pawbook.model.UserPrefs;
 import dog.pawbook.model.managedentity.program.Program;
+import dog.pawbook.testutil.EditProgramDescriptorBuilder;
+import dog.pawbook.testutil.ProgramBuilder;
 import javafx.util.Pair;
 
 /**

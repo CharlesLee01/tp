@@ -12,11 +12,11 @@ import dog.pawbook.model.managedentity.program.Program;
  */
 public class TypicalPrograms {
 
-    public static final Program program1 = new ProgramBuilder().withName("Obedience Training")
+    public static final Program PROGRAM1 = new ProgramBuilder().withName("Obedience Training")
             .withSessions("01-02-2021 18:00").withTags("puppies").build();
-    public static final Program program2 = new ProgramBuilder().withName("Endurance Training")
+    public static final Program PROGRAM2 = new ProgramBuilder().withName("Endurance Training")
             .withSessions("12-12-2012 16:00").withTags("dogs").build();
-    public static final Program program3 = new ProgramBuilder().withName("Strength Training")
+    public static final Program PROGRAM3 = new ProgramBuilder().withName("Strength Training")
             .withSessions("01-01-2011 11:11").withTags("poodles").build();
 
     private TypicalPrograms() {} // prevents instantiation
@@ -33,6 +33,6 @@ public class TypicalPrograms {
     }
 
     public static List<Program> getTypicalPrograms() {
-        return new ArrayList<>(Arrays.asList(program1, program2, program3));
+        return new ArrayList<>(Arrays.asList(PROGRAM1, PROGRAM2, PROGRAM3));
     }
 }
