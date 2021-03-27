@@ -4,7 +4,7 @@ import static dog.pawbook.logic.commands.CommandTestUtil.DESC_AMY;
 import static dog.pawbook.logic.commands.CommandTestUtil.DESC_BOB;
 import static dog.pawbook.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static dog.pawbook.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static dog.pawbook.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static dog.pawbook.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static dog.pawbook.logic.commands.CommandTestUtil.assertCommandFailure;
 import static dog.pawbook.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static dog.pawbook.testutil.TypicalIndexes.ID_FIRST_OWNER;
@@ -29,7 +29,7 @@ import dog.pawbook.testutil.OwnerBuilder;
 import javafx.util.Pair;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for EditOwnerCommand.
  */
 public class EditOwnerCommandTest {
 
@@ -55,10 +55,10 @@ public class EditOwnerCommandTest {
 
         OwnerBuilder ownerInList = new OwnerBuilder(toEditOwner);
         Owner editedOwner = ownerInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+                .withTags(VALID_TAG_FRIEND).build();
 
         EditOwnerDescriptor descriptor = new EditOwnerDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_FRIEND).build();
         EditOwnerCommand editEntityCommand = new EditOwnerCommand(ID_THIRD_OWNER, descriptor);
 
         String expectedMessage = String.format(EditOwnerCommand.MESSAGE_EDIT_OWNER_SUCCESS, editedOwner);
