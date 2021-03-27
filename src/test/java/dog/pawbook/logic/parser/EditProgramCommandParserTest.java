@@ -151,17 +151,6 @@ public class EditProgramCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
-    /*@Test
-    public void parse_invalidValueFollowedByValidValue_success() {
-        // no other valid values specified
-        Integer targetId = ID_FIRST_PROGRAM;
-        String userInput = targetId + INVALID_SESSION_DESC + SESSION_DESC_PROGRAM2;
-        EditProgramDescriptor descriptor = new EditProgramDescriptorBuilder()
-                .withSessions(VALID_SESSION_PROGRAM2).build();
-        EditProgramCommand expectedCommand = new EditProgramCommand(targetId, descriptor);
-        assertParseSuccess(parser, userInput, expectedCommand);
-    }*/
-
     @Test
     public void parse_resetTags_success() {
         Integer targetId = ID_THIRD_PROGRAM;
