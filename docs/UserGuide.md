@@ -3,7 +3,30 @@ layout: page
 title: User Guide
 ---
 
-Pawbook is a desktop application for dog school managers to facilitate their bookkeeping of puppies and dogs in the school, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Besides maintaining dog profiles for each unique dog, managers can view daily class schedules on Pawbook to better plan the day’s activities.
+# **Overview**
+
+Welcome to the Pawbook User Guide! In this user guide, we will teach you as a user how to use Pawbook. 
+This user guide contains a quick start guide, a features walkthrough and a command summary table for easy reference. 
+In each feature/functionality, we also provide command formats and command examples to ensure that users can become 
+proficient in using Pawbook.
+
+## **Introduction**
+Managing a business is definitely not easy, so imagine if your business includes taking care of countless energetic 
+furpals! That's right, we are talking about the job of dog school managers. As dog schools and dog day cares rise in 
+popularity due to the hectic work life of dog owners, the operations of dog schools can get out of hand. But no worries, 
+we have Pawbook to save the day! <br>
+
+Pawbook is a desktop application for dog school managers to facilitate their bookkeeping of puppies and dogs in the 
+school, optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a **Graphical User 
+Interface (GUI)**. Besides maintaining dog profiles for each unique dog, managers can view daily class schedules on 
+Pawbook to better plan the day’s activities.
+
+## **Purpose**
+The purpose of this user guide is to educate users on the different features/components of Pawbook and what are the 
+different purpose they serve. This allow users to easily use the various features and functionalities provided by 
+Pawbook. 
+
+## **Contributors**
 
 This document is created by **CS2103T-T10-Group1**.
 * Charles Lee Lin Ta
@@ -13,39 +36,86 @@ This document is created by **CS2103T-T10-Group1**.
 * Wei Yutong
 * Zhang Anli
 
----
+## **Navigating the User Guide**
+The aim of this User Guide is to provide you with all the information you need to utilise Pawbook. We understand the 
+pains of using a Command Line Interface (CLI) program and have bested our efforts into ensuring a very readable guide
+on how to use our program <br>
+
+If you need help setting up Pawbook, you can go to the _[Quick Start](#quick-start)_ section. <br>
+
+If you want to find out more about Pawbook's features and commands, you can go to the _[Commands](#commands)_ section. <br>
+
+If you need an overview regarding the usage of Pawbook's commands, head on to the _[Command Summary](#command-summary)_ section. <br>
+
+Here are some important syntax to take note of to facilitate your reading before continuing.
+
+| **Symbol/Format** | **Meaning** |
+| :------------------:|:-------------|
+|<kbd>Enter</kbd> | This symbol indicates the enter button on the keyboard |
+| `Markdown` | Important examples |
+| **Bold** | Important words to note |
+| [Repeated Parameters] | Indicates the parameters/prefixes that may be repeated multiple times |
+
+# **About the User Guide**
+In this section, you will learn what the different notations and symbols used in Pawbook. 
+
+## **Syntax Format**
+
+Syntax | Meaning  | Example
+--------|------------------|----------
+**`lower_case/`** |  Prefix | `n/`, `p/`, `t/`
+**`[UPPER_CASE]/`** |  Parameter | [keyword] [entity ID]
+
+## **GUI Layout**
+In this section, you will be given an introduction to the layout of Pawbook's Graphical User Interface(GUI). This will 
+help you better understand what each component that you observe on-screen represents. <br>
+
+There are a total of two pages that you can navigate to when using Pawbook:
+* Main Page
+* Help Page
+
+###Main Page View
+You will be directed to the main page upon launching Pawbook. On this page, you can see the list of owners, dogs and programs
+that are currently stored in Pawbook. <br>
+
+Here is how the main page should look like:
+<img src="images/UIExample.png" width="790"/>
+
+###Help Page View
+Helps you better understand what each component that you observe on-screen represents.
 
 * Table of Contents
 {:toc}
 
 ---
 
-## **Quick start**
+## **Quick Start**
 1. Ensure you have **Java 11 or above** installed in your Computer.
-2. Download the **latest** pawbook.jar.
-3. Copy the file to the folder you want to use as the home folder for your
-   Pawbook.
-4. Double-click the file to start the app.
+2. Download the **latest** pawbook.jar [here][insertlinkhere].
+3. Copy the _pawbook.jar_ file to the folder you want to use as the root directory for Pawbook.
+4. Double-click the file to start the app. The Graphical User Interface (GUI) should appear in a matter of seconds.
+   <img src="images/UIExample.png" width="790"/>
 5. For new users, type `help` in the command box to view the instruction list
-6. Type the command in the command box and press Enter to execute it. e.g.
-   typing `add` and pressing Enter will allow you to start adding information to
+6. Type the command in the command box and press <kbd>Enter</kbd> to execute it. e.g.
+   typing `add` and pressing <kbd>Enter</kbd>  will allow you to start adding information to
    the database.
 
 **NOTE:** Please refer to the features below for details of each command.
 
 ----
 
-## Features of Pawbook
+# Commands 
 
 ### Add Command
-Adds a dog/owner/program to Pawbook.
+
+Adds a **dog/owner/program** to Pawbook.
 
 Format:
 
 ```
 add dog n/DOGNAME b/BREED d/DATEOFBIRTH s/SEX o/OWNERID t/TAG
 add owner n/OWNERNAME p/PHONE_NUMBER e/EMAIL a/ADDRESS
-add program n/PROGRAMNAME s/DATEOFPROGRAM t/TAG
+add program n/PROGRAMNAME s/TIMEANDDATEOFSESSION t/TAG
 ```
 
 Examples:
@@ -53,8 +123,8 @@ Examples:
    Command: `add dog n/Bruce b/Chihuahua d/12-02-2019 s/Male o/1 t/playful t/active`
 2. Adds an owner named John with the details provided in Pawbook.<br>
    Command: `add owner n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney`
-3. Creates a program titled “Program1” that occurs on 2 March 2021 from 4pm to 5pm and on 9 March 2021 1pm to 2pm.<br>
-   Command: `add program n/1 s/02-02-2020 1800 t/puppies`
+3. Creates a program with Program ID 1<br>
+   Command: `add program n/1 s/02-02-2020 18:00 t/puppies`
 
 ### Delete Command
 
@@ -69,7 +139,7 @@ delete program [PROGRAM ID]
 ```
 
 - Deletes the dog/owner/program with the given ID.
-- The ID must be a positive integer 1, 2, 3, ...
+- The ID must be a positive integer 1, 2, 3 etc
 
 Examples:
 1. Deletes the dog with ID 1 in Pawbook.<br>
@@ -101,6 +171,20 @@ Examples:
    Command: `edit owner 2 p/12345678`
 3. Edits the program with ID 3 in Pawbook.<br>
    Command: `edit program 3 t/learn`
+
+### Enrol Command
+
+Adds a specified dog to a specified program that the dog was previously not enrolled in.
+
+Format:
+```
+enrol d/[DOG ID] p/[PROGRAM ID]
+```
+
+Examples:
+1. Enrol dog with Dog ID 1 into program with Program ID 2, assuming that Dog ID 1 was previously not enrolled in 
+   Program ID 2. <br> 
+   Command: `enrol d/1 p/2`
    
 ### Drop Command
 
@@ -108,13 +192,32 @@ Removes a specified dog from a specified program that the dog was previously enr
 
 Format:
 ```
-drop d/<DOG ID> p/<PROGRAM ID>
+drop d/[DOG ID] p/[PROGRAM ID]
 ```
 
 Examples:
-1. Remove dog with Dog ID 1 from program with Program ID 2, assuming that Dog ID 1 was previously enrolled in Program ID 2. <br> 
+1. Remove dog with Dog ID 1 from program with Program ID 2, assuming that Dog ID 1 was previously enrolled in 
+   Program ID 2. <br> 
    Command: `drop d/1 p/2`
    
+### List Command
+
+Display entities filtered by type.
+
+Format:
+```
+list [dog|owner|program]
+```
+
+- At most one keyword needs to be provided
+- If no keyword is provided, i.e. `list`, then all dogs/owner/program will be displayed
+
+Examples:
+1. List all dogs.<br>
+   Command: `list dog`
+2. List all owners.<br>
+   Command: `list owner`
+
 ### Find Command 
 
 Shows the list of search results based on one/many keywords. 
@@ -131,11 +234,13 @@ Examples:
 2. Find all entities with the name 'Alice' or 'Bob' or 'Charlie'.<br>
    Command: `find alice bob charlie`
    
-**Note**: Find is able to take in multiple keywords and returns all results as long as the name contains any one of the keywords. 
+**Note**: Find is able to take in multiple keywords and returns all results as long as the name contains any one of the 
+keywords. 
 
 ### View Command 
 
-Views the list of all entities related to the searched entity. Used in cases when trying to find all the dogs enrolled in a program or all the dogs belonging to one owner. 
+Views the list of all entities related to the searched entity. Used in cases when trying to find all the dogs enrolled 
+in a program or all the dogs belonging to one owner. 
 
 ```
 view [ENTITY ID] 
@@ -164,7 +269,8 @@ Format: `exit`
 
 ## FAQ
 Q: How do I transfer my data to another Computer?<br>
-A: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Pawbook home folder.
+A: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the 
+data of your previous Pawbook home folder.
 
 -----
 
@@ -172,10 +278,19 @@ A: Install the app in the other computer and overwrite the empty data file it cr
 
 Action | Format
 --------|------------------
-**Add** | 1. `add dog n/DOGNAME b/BREED d/DATE OF BIRTH s/SEX o/OWNERID t/TAG`<br>2. `add  owner n/OWNERNAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]...`<br>3. `add  program n/NAME [s/DATE OF SESSION]... [t/tag]...`
+**Add** | 1. `add dog n/DOGNAME b/BREED d/DATE OF BIRTH s/SEX o/OWNERID t/TAG`<br>2. `add owner n/OWNERNAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]...`<br>3. `add  program n/NAME [s/DATE OF SESSION]... [t/tag]...`
 **Delete** | 1. `delete dog d/DOGID`<br>2. `delete owner o/OWNERID`<br>3. `delete program p/PROGRAMID`
-**List** |`list n/NAME c/CLASS b/BREED t/TAG`
+**Enrol** | `enrol d/[DOG ID] p/[PROGRAM ID]`
+**Drop** | `drop d/[DOG ID] p/[PROGRAM ID]`
+**List** |`list [dog|owner|program]`
 **Find** | `find [keyword1] [keyword2] [keyword3] ...`
 **View** | `view [ID number]`
 **Help** | `help`
 **Exit** | `exit`
+
+### Glossary 
+
+Term  | Explanation
+-----|------------------
+CLI | Short for Command Line Interface. CLI-based applications are primarily used through processing text commands. 
+GUI | Short for Graphical User Interface. GUIs work as the tangible user interface between program and user. Users interact with Pawbook through the GUI on their devices.
