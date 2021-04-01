@@ -1,4 +1,3 @@
-//@@author CharlesLee01
 package dog.pawbook.logic.commands;
 
 import static dog.pawbook.commons.util.CollectionUtil.requireAllNonNull;
