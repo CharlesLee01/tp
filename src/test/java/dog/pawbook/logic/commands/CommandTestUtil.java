@@ -18,7 +18,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import dog.pawbook.logic.commands.EditDogCommand.EditDogDescriptor;
-import dog.pawbook.logic.commands.EditEntityCommand.EditEntityDescriptor;
 import dog.pawbook.logic.commands.EditOwnerCommand.EditOwnerDescriptor;
 import dog.pawbook.logic.commands.EditProgramCommand.EditProgramDescriptor;
 import dog.pawbook.logic.commands.exceptions.CommandException;
@@ -27,7 +26,6 @@ import dog.pawbook.model.Model;
 import dog.pawbook.model.managedentity.Entity;
 import dog.pawbook.model.managedentity.NameContainsKeywordsPredicate;
 import dog.pawbook.testutil.EditDogDescriptorBuilder;
-import dog.pawbook.testutil.EditEntityDescriptorBuilder;
 import dog.pawbook.testutil.EditOwnerDescriptorBuilder;
 import dog.pawbook.testutil.EditProgramDescriptorBuilder;
 import javafx.util.Pair;
