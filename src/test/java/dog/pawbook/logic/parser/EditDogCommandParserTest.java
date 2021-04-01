@@ -16,6 +16,7 @@ import static dog.pawbook.logic.commands.CommandTestUtil.SEX_DESC_ASHER;
 import static dog.pawbook.logic.commands.CommandTestUtil.SEX_DESC_BELL;
 import static dog.pawbook.logic.commands.CommandTestUtil.TAG_DESC_FRIENDLY;
 import static dog.pawbook.logic.commands.CommandTestUtil.TAG_DESC_QUIET;
+import static dog.pawbook.logic.commands.CommandTestUtil.TAG_EMPTY;
 import static dog.pawbook.logic.commands.CommandTestUtil.VALID_BREED_ASHER;
 import static dog.pawbook.logic.commands.CommandTestUtil.VALID_BREED_BELL;
 import static dog.pawbook.logic.commands.CommandTestUtil.VALID_DATEOFBIRTH_ASHER;
@@ -26,7 +27,6 @@ import static dog.pawbook.logic.commands.CommandTestUtil.VALID_SEX_ASHER;
 import static dog.pawbook.logic.commands.CommandTestUtil.VALID_SEX_BELL;
 import static dog.pawbook.logic.commands.CommandTestUtil.VALID_TAG_FRIENDLY;
 import static dog.pawbook.logic.commands.CommandTestUtil.VALID_TAG_QUIET;
-import static dog.pawbook.logic.parser.CliSyntax.PREFIX_TAG;
 import static dog.pawbook.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static dog.pawbook.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static dog.pawbook.testutil.TypicalIndexes.ID_FIRST_DOG;
@@ -45,8 +45,6 @@ import dog.pawbook.model.managedentity.tag.Tag;
 import dog.pawbook.testutil.EditDogDescriptorBuilder;
 
 public class EditDogCommandParserTest {
-
-    private static final String TAG_EMPTY = " " + PREFIX_TAG;
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditDogCommand.MESSAGE_USAGE);

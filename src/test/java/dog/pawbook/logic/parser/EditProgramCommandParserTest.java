@@ -10,13 +10,13 @@ import static dog.pawbook.logic.commands.CommandTestUtil.SESSION_DESC_PROGRAM1;
 import static dog.pawbook.logic.commands.CommandTestUtil.SESSION_DESC_PROGRAM2;
 import static dog.pawbook.logic.commands.CommandTestUtil.TAG_DESC_DOGS;
 import static dog.pawbook.logic.commands.CommandTestUtil.TAG_DESC_PUPPIES;
+import static dog.pawbook.logic.commands.CommandTestUtil.TAG_EMPTY;
 import static dog.pawbook.logic.commands.CommandTestUtil.VALID_NAME_PROGRAM_A;
 import static dog.pawbook.logic.commands.CommandTestUtil.VALID_NAME_PROGRAM_B;
 import static dog.pawbook.logic.commands.CommandTestUtil.VALID_SESSION_PROGRAM_A;
 import static dog.pawbook.logic.commands.CommandTestUtil.VALID_SESSION_PROGRAM_B;
 import static dog.pawbook.logic.commands.CommandTestUtil.VALID_TAG_DOGS;
 import static dog.pawbook.logic.commands.CommandTestUtil.VALID_TAG_PUPPIES;
-import static dog.pawbook.logic.parser.CliSyntax.PREFIX_TAG;
 import static dog.pawbook.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static dog.pawbook.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static dog.pawbook.testutil.TypicalIndexes.ID_FIRST_PROGRAM;
@@ -33,8 +33,6 @@ import dog.pawbook.model.managedentity.tag.Tag;
 import dog.pawbook.testutil.EditProgramDescriptorBuilder;
 
 public class EditProgramCommandParserTest {
-
-    private static final String TAG_EMPTY = " " + PREFIX_TAG;
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditProgramCommand.MESSAGE_USAGE);
