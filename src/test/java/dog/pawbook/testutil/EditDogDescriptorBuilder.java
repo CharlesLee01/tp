@@ -9,66 +9,61 @@ import dog.pawbook.model.managedentity.dog.Sex;
 /**
  * A utility class to help with building EditDogDescriptor objects.
  */
-public class EditDogDescriptorBuilder extends EditEntityDescriptorBuilder<EditDogDescriptorBuilder> {
+public class EditDogDescriptorBuilder extends EditEntityDescriptorBuilder<EditDogDescriptorBuilder, EditDogDescriptor> {
 
     public EditDogDescriptorBuilder() {
-        descriptor = new EditDogDescriptor();
+        super(new EditDogDescriptor());
     }
 
     public EditDogDescriptorBuilder(EditDogDescriptor descriptor) {
-        this.descriptor = new EditDogDescriptor(descriptor);
+        super(new EditDogDescriptor(descriptor));
     }
 
     /**
      * Returns an {@code EditDogDescriptor} with fields containing {@code dog}'s details
      */
     public EditDogDescriptorBuilder(Dog dog) {
-        descriptor = new EditDogDescriptor();
-        setDescriptor(dog);
-        EditDogDescriptor editProgramDescriptor = (EditDogDescriptor) descriptor;
-        editProgramDescriptor.setBreed(dog.getBreed());
-        editProgramDescriptor.setDob(dog.getDob());
-        editProgramDescriptor.setSex(dog.getSex());
-        editProgramDescriptor.setOwnerId(dog.getOwnerId());
+        super(new EditDogDescriptor(), dog);
+        descriptor.setBreed(dog.getBreed());
+        descriptor.setDob(dog.getDob());
+        descriptor.setSex(dog.getSex());
+        descriptor.setOwnerId(dog.getOwnerId());
     }
 
     /**
      * Sets the {@code Breed} of the {@code EditDogDescriptor} that we are building.
      */
-    public EditDogDescriptorBuilder withBreed(String breed) {
-        EditDogDescriptor editProgramDescriptor = (EditDogDescriptor) descriptor;
-        editProgramDescriptor.setBreed(new Breed(breed));
-        return this;
+    public final EditDogDescriptorBuilder withBreed(String breed) {
+        descriptor.setBreed(new Breed(breed));
+        return self();
     }
 
     /**
      * Sets the {@code DateOfBirth} of the {@code EditDogDescriptor} that we are building.
      */
-    public EditDogDescriptorBuilder withDob(String dob) {
-        EditDogDescriptor editProgramDescriptor = (EditDogDescriptor) descriptor;
-        editProgramDescriptor.setDob(new DateOfBirth(dob));
-        return this;
+    public final EditDogDescriptorBuilder withDob(String dob) {
+        descriptor.setDob(new DateOfBirth(dob));
+        return self();
     }
 
     /**
      * Sets the {@code Sex} of the {@code EditDogDescriptor} that we are building.
      */
-    public EditDogDescriptorBuilder withSex(String sex) {
-        EditDogDescriptor editProgramDescriptor = (EditDogDescriptor) descriptor;
-        editProgramDescriptor.setSex(new Sex(sex));
-        return this;
+    public final EditDogDescriptorBuilder withSex(String sex) {
+        descriptor.setSex(new Sex(sex));
+        return self();
     }
 
     /**
-     * Sets the {@code Sex} of the {@code EditDogDescriptor} that we are building.
+     * Sets the {@code OwnerId} of the {@code EditDogDescriptor} that we are building.
      */
-    public EditDogDescriptorBuilder withOwnerId(int ownerId) {
-        EditDogDescriptor editProgramDescriptor = (EditDogDescriptor) descriptor;
-        editProgramDescriptor.setOwnerId(ownerId);
-        return this;
+    public final EditDogDescriptorBuilder withOwnerId(int ownerId) {
+        descriptor.setOwnerId(ownerId);
+        return self();
     }
 
-    public EditDogDescriptor build() {
-        return (EditDogDescriptor) descriptor;
+    @Override
+    protected EditDogDescriptorBuilder self() {
+        return this;
     }
 }

@@ -9,56 +9,53 @@ import dog.pawbook.model.managedentity.owner.Phone;
 /**
  * A utility class to help with building EditOwnerDescriptor objects.
  */
-public class EditOwnerDescriptorBuilder extends EditEntityDescriptorBuilder<EditOwnerDescriptorBuilder> {
+public class EditOwnerDescriptorBuilder
+        extends EditEntityDescriptorBuilder<EditOwnerDescriptorBuilder, EditOwnerDescriptor> {
 
     public EditOwnerDescriptorBuilder() {
-        descriptor = new EditOwnerDescriptor();
+        super(new EditOwnerDescriptor());
     }
 
     public EditOwnerDescriptorBuilder(EditOwnerDescriptor descriptor) {
-        this.descriptor = new EditOwnerDescriptor(descriptor);
+        super(new EditOwnerDescriptor(descriptor));
     }
 
     /**
      * Returns an {@code EditOwnerDescriptor} with fields containing {@code owner}'s details
      */
     public EditOwnerDescriptorBuilder(Owner owner) {
-        descriptor = new EditOwnerDescriptor();
-        setDescriptor(owner);
-        EditOwnerDescriptor editOwnerDescriptor = (EditOwnerDescriptor) descriptor;
-        editOwnerDescriptor.setPhone(owner.getPhone());
-        editOwnerDescriptor.setEmail(owner.getEmail());
-        editOwnerDescriptor.setAddress(owner.getAddress());
+        super(new EditOwnerDescriptor(), owner);
+        descriptor.setPhone(owner.getPhone());
+        descriptor.setEmail(owner.getEmail());
+        descriptor.setAddress(owner.getAddress());
     }
 
     /**
      * Sets the {@code Phone} of the {@code EditOwnerDescriptor} that we are building.
      */
-    public EditOwnerDescriptorBuilder withPhone(String phone) {
-        EditOwnerDescriptor editOwnerDescriptor = (EditOwnerDescriptor) descriptor;
-        editOwnerDescriptor.setPhone(new Phone(phone));
-        return this;
+    public final EditOwnerDescriptorBuilder withPhone(String phone) {
+        descriptor.setPhone(new Phone(phone));
+        return self();
     }
 
     /**
      * Sets the {@code Email} of the {@code EditOwnerDescriptor} that we are building.
      */
-    public EditOwnerDescriptorBuilder withEmail(String email) {
-        EditOwnerDescriptor editOwnerDescriptor = (EditOwnerDescriptor) descriptor;
-        editOwnerDescriptor.setEmail(new Email(email));
-        return this;
+    public final EditOwnerDescriptorBuilder withEmail(String email) {
+        descriptor.setEmail(new Email(email));
+        return self();
     }
 
     /**
      * Sets the {@code Address} of the {@code EditOwnerDescriptor} that we are building.
      */
-    public EditOwnerDescriptorBuilder withAddress(String address) {
-        EditOwnerDescriptor editOwnerDescriptor = (EditOwnerDescriptor) descriptor;
-        editOwnerDescriptor.setAddress(new Address(address));
-        return this;
+    public final EditOwnerDescriptorBuilder withAddress(String address) {
+        descriptor.setAddress(new Address(address));
+        return self();
     }
 
-    public EditOwnerDescriptor build() {
-        return (EditOwnerDescriptor) descriptor;
+    @Override
+    protected EditOwnerDescriptorBuilder self() {
+        return this;
     }
 }

@@ -1,65 +1,55 @@
 package dog.pawbook.testutil;
 
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import dog.pawbook.logic.commands.EditEntityCommand.EditEntityDescriptor;
 import dog.pawbook.model.managedentity.Entity;
 import dog.pawbook.model.managedentity.Name;
 import dog.pawbook.model.managedentity.tag.Tag;
+import dog.pawbook.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building EditEntityDescriptor objects.
  */
-public class EditEntityDescriptorBuilder<T> {
+abstract class EditEntityDescriptorBuilder<T extends EditEntityDescriptorBuilder<T, ? extends EditEntityDescriptor>,
+        S extends EditEntityDescriptor> {
 
-    protected EditEntityDescriptor descriptor;
+    protected S descriptor;
 
-    public EditEntityDescriptorBuilder() {
-        descriptor = new EditEntityDescriptor();
-    }
-
-    public EditEntityDescriptorBuilder(EditEntityDescriptor descriptor) {
-        this.descriptor = new EditEntityDescriptor(descriptor);
+    protected EditEntityDescriptorBuilder(S descriptor) {
+        this.descriptor = descriptor;
     }
 
     /**
      * Returns an {@code EditEntityDescriptor} with fields containing {@code entity}'s details
      */
-    public EditEntityDescriptorBuilder(Entity entity) {
-        descriptor = new EditEntityDescriptor();
-        descriptor.setName(entity.getName());
-        descriptor.setTags(entity.getTags());
-    }
-
-    /**
-     * Returns an {@code EditEntityDescriptor} with fields containing {@code entity}'s details
-     */
-    public void setDescriptor(Entity entity) {
-        descriptor.setName(entity.getName());
-        descriptor.setTags(entity.getTags());
+    public EditEntityDescriptorBuilder(S descriptor, Entity entity) {
+        this.descriptor = descriptor;
+        this.descriptor.setName(entity.getName());
+        this.descriptor.setTags(entity.getTags());
     }
 
     /**
      * Sets the {@code Name} of the {@code EditEntityDescriptor} that we are building.
      */
-    public T withName(String name) {
+    public final T withName(String name) {
         descriptor.setName(new Name(name));
-        return (T) this;
+        return self();
     }
 
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditEntityDescriptor}
      * that we are building.
      */
-    public T withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
+    public final T withTags(String... tags) {
+        Set<Tag> tagSet = SampleDataUtil.getTagSet(tags);
         descriptor.setTags(tagSet);
-        return (T) this;
+        return self();
     }
 
-    public EditEntityDescriptor build() {
+    public final S build() {
         return descriptor;
     }
+
+    protected abstract T self();
 }
