@@ -10,10 +10,10 @@ import static dog.pawbook.logic.commands.CommandTestUtil.SESSION_DESC_PROGRAM1;
 import static dog.pawbook.logic.commands.CommandTestUtil.SESSION_DESC_PROGRAM2;
 import static dog.pawbook.logic.commands.CommandTestUtil.TAG_DESC_DOGS;
 import static dog.pawbook.logic.commands.CommandTestUtil.TAG_DESC_PUPPIES;
-import static dog.pawbook.logic.commands.CommandTestUtil.VALID_NAME_PROGRAM1;
-import static dog.pawbook.logic.commands.CommandTestUtil.VALID_NAME_PROGRAM2;
-import static dog.pawbook.logic.commands.CommandTestUtil.VALID_SESSION_PROGRAM1;
-import static dog.pawbook.logic.commands.CommandTestUtil.VALID_SESSION_PROGRAM2;
+import static dog.pawbook.logic.commands.CommandTestUtil.VALID_NAME_PROGRAM_A;
+import static dog.pawbook.logic.commands.CommandTestUtil.VALID_NAME_PROGRAM_B;
+import static dog.pawbook.logic.commands.CommandTestUtil.VALID_SESSION_PROGRAM_A;
+import static dog.pawbook.logic.commands.CommandTestUtil.VALID_SESSION_PROGRAM_B;
 import static dog.pawbook.logic.commands.CommandTestUtil.VALID_TAG_DOGS;
 import static dog.pawbook.logic.commands.CommandTestUtil.VALID_TAG_PUPPIES;
 import static dog.pawbook.logic.parser.CliSyntax.PREFIX_TAG;
@@ -27,7 +27,6 @@ import org.junit.jupiter.api.Test;
 
 import dog.pawbook.logic.commands.EditProgramCommand;
 import dog.pawbook.logic.commands.EditProgramCommand.EditProgramDescriptor;
-import dog.pawbook.logic.parser.exceptions.ParseException;
 import dog.pawbook.model.managedentity.Name;
 import dog.pawbook.model.managedentity.program.Session;
 import dog.pawbook.model.managedentity.tag.Tag;
@@ -45,7 +44,7 @@ public class EditProgramCommandParserTest {
     @Test
     public void parse_missingParts_failure() {
         // no index specified
-        assertParseFailure(parser, VALID_NAME_PROGRAM1, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, VALID_NAME_PROGRAM_A, MESSAGE_INVALID_FORMAT);
 
         // no field specified
         assertParseFailure(parser, "1", EditProgramCommand.MESSAGE_NOT_EDITED);
@@ -98,20 +97,20 @@ public class EditProgramCommandParserTest {
         Integer targetId = ID_SECOND_PROGRAM;
         String userInput = targetId + TAG_DESC_DOGS + SESSION_DESC_PROGRAM1 + NAME_DESC_PROGRAM1 + TAG_DESC_PUPPIES;
 
-        EditProgramDescriptor descriptor = new EditProgramDescriptorBuilder().withName(VALID_NAME_PROGRAM1)
-                .withSessions(VALID_SESSION_PROGRAM1).withTags(VALID_TAG_DOGS, VALID_TAG_PUPPIES).build();
+        EditProgramDescriptor descriptor = new EditProgramDescriptorBuilder().withName(VALID_NAME_PROGRAM_A)
+                .withSessions(VALID_SESSION_PROGRAM_A).withTags(VALID_TAG_DOGS, VALID_TAG_PUPPIES).build();
         EditProgramCommand expectedCommand = new EditProgramCommand(targetId, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
-    public void parse_someFieldsSpecified_success() throws ParseException {
+    public void parse_someFieldsSpecified_success() {
         Integer targetId = ID_FIRST_PROGRAM;
         String userInput = targetId + SESSION_DESC_PROGRAM1 + NAME_DESC_PROGRAM2;
 
-        EditProgramDescriptor descriptor = new EditProgramDescriptorBuilder().withName(VALID_NAME_PROGRAM2)
-                .withSessions(VALID_SESSION_PROGRAM1).build();
+        EditProgramDescriptor descriptor = new EditProgramDescriptorBuilder().withName(VALID_NAME_PROGRAM_B)
+                .withSessions(VALID_SESSION_PROGRAM_A).build();
         EditProgramCommand expectedCommand = new EditProgramCommand(targetId, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -122,13 +121,13 @@ public class EditProgramCommandParserTest {
         // name
         Integer targetId = ID_THIRD_PROGRAM;
         String userInput = targetId + NAME_DESC_PROGRAM1;
-        EditProgramDescriptor descriptor = new EditProgramDescriptorBuilder().withName(VALID_NAME_PROGRAM1).build();
+        EditProgramDescriptor descriptor = new EditProgramDescriptorBuilder().withName(VALID_NAME_PROGRAM_A).build();
         EditProgramCommand expectedCommand = new EditProgramCommand(targetId, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // sessions
         userInput = targetId + SESSION_DESC_PROGRAM1;
-        descriptor = new EditProgramDescriptorBuilder().withSessions(VALID_SESSION_PROGRAM1).build();
+        descriptor = new EditProgramDescriptorBuilder().withSessions(VALID_SESSION_PROGRAM_A).build();
         expectedCommand = new EditProgramCommand(targetId, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -145,7 +144,7 @@ public class EditProgramCommandParserTest {
         String userInput = targetId + TAG_DESC_PUPPIES + TAG_DESC_DOGS + TAG_DESC_DOGS + TAG_DESC_PUPPIES
                 + SESSION_DESC_PROGRAM2 + SESSION_DESC_PROGRAM2 + TAG_DESC_PUPPIES;
 
-        EditProgramDescriptor descriptor = new EditProgramDescriptorBuilder().withSessions(VALID_SESSION_PROGRAM2)
+        EditProgramDescriptor descriptor = new EditProgramDescriptorBuilder().withSessions(VALID_SESSION_PROGRAM_B)
                 .withTags(VALID_TAG_DOGS, VALID_TAG_PUPPIES).build();
         EditProgramCommand expectedCommand = new EditProgramCommand(targetId, descriptor);
 

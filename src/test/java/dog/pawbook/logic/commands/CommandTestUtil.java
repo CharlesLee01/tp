@@ -14,7 +14,6 @@ import static dog.pawbook.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import dog.pawbook.logic.commands.EditDogCommand.EditDogDescriptor;
@@ -24,7 +23,6 @@ import dog.pawbook.logic.commands.exceptions.CommandException;
 import dog.pawbook.model.Database;
 import dog.pawbook.model.Model;
 import dog.pawbook.model.managedentity.Entity;
-import dog.pawbook.model.managedentity.NameContainsKeywordsPredicate;
 import dog.pawbook.testutil.EditDogDescriptorBuilder;
 import dog.pawbook.testutil.EditOwnerDescriptorBuilder;
 import dog.pawbook.testutil.EditProgramDescriptorBuilder;
@@ -83,17 +81,17 @@ public class CommandTestUtil {
     public static final String TAG_DESC_FRIENDLY = " " + PREFIX_TAG + VALID_TAG_FRIENDLY;
     public static final String TAG_DESC_QUIET = " " + PREFIX_TAG + VALID_TAG_QUIET;
 
-    public static final String VALID_NAME_PROGRAM1 = "Obedience Training";
-    public static final String VALID_NAME_PROGRAM2 = "Endurance Training";
-    public static final String VALID_SESSION_PROGRAM1 = "1-2-2021 18:00";
-    public static final String VALID_SESSION_PROGRAM2 = "12-12-2012 16:00";
+    public static final String VALID_NAME_PROGRAM_A = "Obedience Training";
+    public static final String VALID_NAME_PROGRAM_B = "Endurance Training";
+    public static final String VALID_SESSION_PROGRAM_A = "1-2-2021 18:00";
+    public static final String VALID_SESSION_PROGRAM_B = "12-12-2012 16:00";
     public static final String VALID_TAG_PUPPIES = "puppies";
     public static final String VALID_TAG_DOGS = "dogs";
 
-    public static final String NAME_DESC_PROGRAM1 = " " + PREFIX_NAME + VALID_NAME_PROGRAM1;
-    public static final String NAME_DESC_PROGRAM2 = " " + PREFIX_NAME + VALID_NAME_PROGRAM2;
-    public static final String SESSION_DESC_PROGRAM1 = " " + PREFIX_SESSION + VALID_SESSION_PROGRAM1;
-    public static final String SESSION_DESC_PROGRAM2 = " " + PREFIX_SESSION + VALID_SESSION_PROGRAM2;
+    public static final String NAME_DESC_PROGRAM1 = " " + PREFIX_NAME + VALID_NAME_PROGRAM_A;
+    public static final String NAME_DESC_PROGRAM2 = " " + PREFIX_NAME + VALID_NAME_PROGRAM_B;
+    public static final String SESSION_DESC_PROGRAM1 = " " + PREFIX_SESSION + VALID_SESSION_PROGRAM_A;
+    public static final String SESSION_DESC_PROGRAM2 = " " + PREFIX_SESSION + VALID_SESSION_PROGRAM_B;
     public static final String TAG_DESC_PUPPIES = " " + PREFIX_TAG + "puppies";
     public static final String TAG_DESC_DOGS = " " + PREFIX_TAG + "dogs";
 
@@ -117,8 +115,8 @@ public class CommandTestUtil {
     public static final EditOwnerDescriptor DESC_BOB;
     public static final EditDogDescriptor DESC_ASHER;
     public static final EditDogDescriptor DESC_BELL;
-    public static final EditProgramDescriptor DESC_PROGRAM_1;
-    public static final EditProgramDescriptor DESC_PROGRAM_2;
+    public static final EditProgramDescriptor DESC_PROGRAM_A;
+    public static final EditProgramDescriptor DESC_PROGRAM_B;
 
     static {
         DESC_AMY = new EditOwnerDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -127,22 +125,18 @@ public class CommandTestUtil {
         DESC_BOB = new EditOwnerDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
-    }
 
-    static {
         DESC_ASHER = new EditDogDescriptorBuilder().withName(VALID_NAME_ASHER).withBreed(VALID_BREED_ASHER)
                 .withDob(VALID_DATEOFBIRTH_ASHER).withSex(VALID_SEX_ASHER).withOwnerId(VALID_OWNERID_9)
                 .withTags(VALID_TAG_FRIENDLY).build();
         DESC_BELL = new EditDogDescriptorBuilder().withName(VALID_NAME_BELL).withBreed(VALID_BREED_BELL)
                 .withDob(VALID_DATEOFBIRTH_BELL).withSex(VALID_SEX_BELL).withOwnerId(VALID_OWNERID_10)
                 .withTags(VALID_TAG_QUIET).build();
-    }
 
-    static {
-        DESC_PROGRAM_1 = new EditProgramDescriptorBuilder().withName(VALID_NAME_PROGRAM1)
-                .withSessions(VALID_SESSION_PROGRAM1).withTags(VALID_TAG_PUPPIES).build();
-        DESC_PROGRAM_2 = new EditProgramDescriptorBuilder().withName(VALID_NAME_PROGRAM2)
-                .withSessions(VALID_SESSION_PROGRAM2).withTags(VALID_TAG_DOGS).build();
+        DESC_PROGRAM_A = new EditProgramDescriptorBuilder().withName(VALID_NAME_PROGRAM_A)
+                .withSessions(VALID_SESSION_PROGRAM_A).withTags(VALID_TAG_PUPPIES).build();
+        DESC_PROGRAM_B = new EditProgramDescriptorBuilder().withName(VALID_NAME_PROGRAM_B)
+                .withSessions(VALID_SESSION_PROGRAM_B).withTags(VALID_TAG_DOGS).build();
     }
 
     /**
@@ -188,15 +182,4 @@ public class CommandTestUtil {
         assertEquals(expectedFilteredList, actualModel.getFilteredEntityList());
     }
 
-    /**
-     * Updates {@code model}'s filtered list to show only the dog at the given {@code targetIndex} in the
-     * {@code model}'s database.
-     */
-    public static void showDogAtIndex(Model model, Integer targetIndex) {
-        Entity entity = model.getFilteredEntityList().get(0).getValue();
-        final String[] splitName = entity.getName().fullName.split("\\s+");
-        model.updateFilteredEntityList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
-
-        assertEquals(1, model.getFilteredEntityList().size());
-    }
 }

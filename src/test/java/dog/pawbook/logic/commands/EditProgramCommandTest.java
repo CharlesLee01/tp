@@ -1,7 +1,7 @@
 package dog.pawbook.logic.commands;
 
-import static dog.pawbook.logic.commands.CommandTestUtil.DESC_PROGRAM_1;
-import static dog.pawbook.logic.commands.CommandTestUtil.DESC_PROGRAM_2;
+import static dog.pawbook.logic.commands.CommandTestUtil.DESC_PROGRAM_A;
+import static dog.pawbook.logic.commands.CommandTestUtil.DESC_PROGRAM_B;
 import static dog.pawbook.testutil.TypicalIndexes.ID_FIRST_PROGRAM;
 import static dog.pawbook.testutil.TypicalIndexes.ID_SECOND_PROGRAM;
 import static dog.pawbook.testutil.TypicalPrograms.getTypicalAddressBook;
@@ -24,10 +24,10 @@ public class EditProgramCommandTest {
 
     @Test
     public void equals() {
-        final EditProgramCommand standardCommand = new EditProgramCommand(ID_FIRST_PROGRAM, DESC_PROGRAM_1);
+        final EditProgramCommand standardCommand = new EditProgramCommand(ID_FIRST_PROGRAM, DESC_PROGRAM_A);
 
         // same values -> returns true
-        EditProgramDescriptor copyDescriptor = new EditProgramDescriptor(DESC_PROGRAM_1);
+        EditProgramDescriptor copyDescriptor = new EditProgramDescriptor(DESC_PROGRAM_A);
         EditProgramCommand commandWithSameValues = new EditProgramCommand(ID_FIRST_PROGRAM, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
@@ -41,9 +41,9 @@ public class EditProgramCommandTest {
         assertFalse(standardCommand.equals(new HelpCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditProgramCommand(ID_SECOND_PROGRAM, DESC_PROGRAM_1)));
+        assertFalse(standardCommand.equals(new EditProgramCommand(ID_SECOND_PROGRAM, DESC_PROGRAM_A)));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditProgramCommand(ID_FIRST_PROGRAM, DESC_PROGRAM_2)));
+        assertFalse(standardCommand.equals(new EditProgramCommand(ID_FIRST_PROGRAM, DESC_PROGRAM_B)));
     }
 }
