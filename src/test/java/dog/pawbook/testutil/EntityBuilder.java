@@ -11,9 +11,9 @@ import dog.pawbook.model.util.SampleDataUtil;
 /**
  * A utility class to help with building Owner objects.
  */
-public class EntityBuilder<T> {
+abstract class EntityBuilder<T extends EntityBuilder<T, ? extends Entity>, S extends Entity> {
 
-    public static final String DEFAULT_NAME = "EntityName";
+    public static final String DEFAULT_NAME = "Entity Name Not Specified";
 
     protected Name name;
     protected Set<Tag> tags;
@@ -29,7 +29,7 @@ public class EntityBuilder<T> {
     /**
      * Initializes the EntityBuilder with the data of {@code entityToCopy}.
      */
-    public EntityBuilder(Entity entityToCopy) {
+    public EntityBuilder(S entityToCopy) {
         name = entityToCopy.getName();
         tags = new HashSet<>(entityToCopy.getTags());
     }
@@ -37,16 +37,21 @@ public class EntityBuilder<T> {
     /**
      * Sets the {@code Name} of the {@code Entity} that we are building.
      */
-    public T withName(String name) {
+    public final T withName(String name) {
         this.name = new Name(name);
-        return (T) this;
+        return self();
     }
 
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Entity} that we are building.
      */
-    public T withTags(String ... tags) {
+    public final T withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
-        return (T) this;
+        return self();
     }
+
+    public abstract S build();
+
+    protected abstract T self();
+
 }

@@ -12,7 +12,7 @@ import dog.pawbook.model.util.SampleDataUtil;
 /**
  * A utility class to help with building Owner objects.
  */
-public class OwnerBuilder extends EntityBuilder<OwnerBuilder> {
+public class OwnerBuilder extends EntityBuilder<OwnerBuilder, Owner> {
 
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
@@ -45,36 +45,41 @@ public class OwnerBuilder extends EntityBuilder<OwnerBuilder> {
         dogIds = new HashSet<>(ownerToCopy.getDogIdSet());
     }
 
+    @Override
+    protected OwnerBuilder self() {
+        return this;
+    }
+
     /**
      * Sets the {@code Address} of the {@code Owner} that we are building.
      */
-    public OwnerBuilder withAddress(String address) {
+    public final OwnerBuilder withAddress(String address) {
         this.address = new Address(address);
-        return this;
+        return self();
     }
 
     /**
      * Sets the {@code Phone} of the {@code Owner} that we are building.
      */
-    public OwnerBuilder withPhone(String phone) {
+    public final OwnerBuilder withPhone(String phone) {
         this.phone = new Phone(phone);
-        return this;
+        return self();
     }
 
     /**
      * Sets the {@code Email} of the {@code Owner} that we are building.
      */
-    public OwnerBuilder withEmail(String email) {
+    public final OwnerBuilder withEmail(String email) {
         this.email = new Email(email);
-        return this;
+        return self();
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Integer>} and set it to the {@code Owner} that we are building.
+     * Parses the {@code dogIds} into a {@code Set<Integer>} and set it to the {@code Owner} that we are building.
      */
-    public OwnerBuilder withDogs(Integer... dogIds) {
+    public final OwnerBuilder withDogs(Integer... dogIds) {
         this.dogIds = SampleDataUtil.getIdSet(dogIds);
-        return this;
+        return self();
     }
 
     public Owner build() {

@@ -8,12 +8,12 @@ import dog.pawbook.model.managedentity.dog.Sex;
 /**
  * A utility class to help with building Dog objects.
  */
-public class DogBuilder extends EntityBuilder<DogBuilder> {
+public class DogBuilder extends EntityBuilder<DogBuilder, Dog> {
 
     public static final String DEFAULT_BREED = "Golden Retriever";
     public static final String DEFAULT_DATEOFBIRTH = "10-1-2020";
     public static final String DEFAULT_SEX = "male";
-    public static final int DEFAULT_OWNERID = 1;
+    public static final int DEFAULT_OWNER_ID = 1;
 
     private Breed breed;
     private DateOfBirth dob;
@@ -28,7 +28,7 @@ public class DogBuilder extends EntityBuilder<DogBuilder> {
         breed = new Breed(DEFAULT_BREED);
         dob = new DateOfBirth(DEFAULT_DATEOFBIRTH);
         sex = new Sex(DEFAULT_SEX);
-        ownerID = DEFAULT_OWNERID;
+        ownerID = DEFAULT_OWNER_ID;
     }
 
     /**
@@ -42,38 +42,44 @@ public class DogBuilder extends EntityBuilder<DogBuilder> {
         ownerID = dogToCopy.getOwnerId();
     }
 
+    @Override
+    protected DogBuilder self() {
+        return this;
+    }
+
     /**
      * Sets the {@code Breed} of the {@code Dog} that we are building.
      */
-    public DogBuilder withBreed(String breed) {
+    public final DogBuilder withBreed(String breed) {
         this.breed = new Breed(breed);
-        return this;
+        return self();
     }
 
     /**
      * Sets the {@code DateOfBirth} of the {@code Dog} that we are building.
      */
-    public DogBuilder withDateOfBirth(String dob) {
+    public final DogBuilder withDateOfBirth(String dob) {
         this.dob = new DateOfBirth(dob);
-        return this;
+        return self();
     }
 
     /**
      * Sets the {@code Sex} of the {@code Dog} that we are building.
      */
-    public DogBuilder withSex(String sex) {
+    public final DogBuilder withSex(String sex) {
         this.sex = new Sex(sex);
-        return this;
+        return self();
     }
 
     /**
      * Sets the {@code OwnerID} of the {@code Dog} that we are building.
      */
-    public DogBuilder withOwnerID(int ownerID) {
+    public final DogBuilder withOwnerID(int ownerID) {
         this.ownerID = ownerID;
-        return this;
+        return self();
     }
 
+    @Override
     public Dog build() {
         return new Dog(name, breed, dob, sex, ownerID, tags);
     }
