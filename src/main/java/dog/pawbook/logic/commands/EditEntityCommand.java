@@ -1,3 +1,4 @@
+//@@author CharlesLee01
 package dog.pawbook.logic.commands;
 
 import static dog.pawbook.commons.util.CollectionUtil.requireAllNonNull;
@@ -182,7 +183,6 @@ public abstract class EditEntityCommand extends Command {
 
             // state check
             EditEntityDescriptor e = (EditEntityDescriptor) other;
-
             return getName().equals(e.getName())
                     && getTags().equals(e.getTags());
         }

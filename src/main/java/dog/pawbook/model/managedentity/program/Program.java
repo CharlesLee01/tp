@@ -51,18 +51,6 @@ public class Program extends Entity {
         this.dogidSet.addAll(dogIDs);
     }
 
-    public Name getName() {
-        return name;
-    }
-
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
-    }
-
     public Set<Integer> getDogIdSet() {
         return Collections.unmodifiableSet(dogidSet);
     }

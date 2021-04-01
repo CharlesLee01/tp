@@ -7,6 +7,7 @@ import static dog.pawbook.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static dog.pawbook.logic.parser.CliSyntax.PREFIX_NAME;
 import static dog.pawbook.logic.parser.CliSyntax.PREFIX_OWNERID;
 import static dog.pawbook.logic.parser.CliSyntax.PREFIX_PHONE;
+import static dog.pawbook.logic.parser.CliSyntax.PREFIX_SESSION;
 import static dog.pawbook.logic.parser.CliSyntax.PREFIX_SEX;
 import static dog.pawbook.logic.parser.CliSyntax.PREFIX_TAG;
 import static dog.pawbook.testutil.Assert.assertThrows;
@@ -16,12 +17,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import dog.pawbook.logic.commands.EditDogCommand.EditDogDescriptor;
+import dog.pawbook.logic.commands.EditEntityCommand.EditEntityDescriptor;
+import dog.pawbook.logic.commands.EditOwnerCommand.EditOwnerDescriptor;
+import dog.pawbook.logic.commands.EditProgramCommand.EditProgramDescriptor;
 import dog.pawbook.logic.commands.exceptions.CommandException;
 import dog.pawbook.model.Database;
 import dog.pawbook.model.Model;
 import dog.pawbook.model.managedentity.Entity;
 import dog.pawbook.model.managedentity.NameContainsKeywordsPredicate;
+import dog.pawbook.testutil.EditDogDescriptorBuilder;
+import dog.pawbook.testutil.EditEntityDescriptorBuilder;
 import dog.pawbook.testutil.EditOwnerDescriptorBuilder;
+import dog.pawbook.testutil.EditProgramDescriptorBuilder;
 import javafx.util.Pair;
 
 /**
@@ -77,6 +85,20 @@ public class CommandTestUtil {
     public static final String TAG_DESC_FRIENDLY = " " + PREFIX_TAG + VALID_TAG_FRIENDLY;
     public static final String TAG_DESC_QUIET = " " + PREFIX_TAG + VALID_TAG_QUIET;
 
+    public static final String VALID_NAME_PROGRAM1 = "Obedience Training";
+    public static final String VALID_NAME_PROGRAM2 = "Endurance Training";
+    public static final String VALID_SESSION_PROGRAM1 = "1-2-2021 18:00";
+    public static final String VALID_SESSION_PROGRAM2 = "12-12-2012 16:00";
+    public static final String VALID_TAG_PUPPIES = "puppies";
+    public static final String VALID_TAG_DOGS = "dogs";
+
+    public static final String NAME_DESC_PROGRAM1 = " " + PREFIX_NAME + VALID_NAME_PROGRAM1;
+    public static final String NAME_DESC_PROGRAM2 = " " + PREFIX_NAME + VALID_NAME_PROGRAM2;
+    public static final String SESSION_DESC_PROGRAM1 = " " + PREFIX_SESSION + VALID_SESSION_PROGRAM1;
+    public static final String SESSION_DESC_PROGRAM2 = " " + PREFIX_SESSION + VALID_SESSION_PROGRAM2;
+    public static final String TAG_DESC_PUPPIES = " " + PREFIX_TAG + "puppies";
+    public static final String TAG_DESC_DOGS = " " + PREFIX_TAG + "dogs";
+
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
@@ -87,12 +109,18 @@ public class CommandTestUtil {
     // allowed in dates of birth
     public static final String INVALID_BREED_DESC = " " + PREFIX_BREED + "poodle!"; // '!' not allowed for breed
     public static final String INVALID_OWNERID_DESC = " " + PREFIX_OWNERID; // empty ownerID not allowed
+    // session only allows mm-dd-yyyy hh:mm format and should only contain numbers
+    public static final String INVALID_SESSION_DESC = " " + PREFIX_SESSION + "a-a-2020 18:00";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditOwnerCommand.EditOwnerDescriptor DESC_AMY;
-    public static final EditOwnerCommand.EditOwnerDescriptor DESC_BOB;
+    public static final EditOwnerDescriptor DESC_AMY;
+    public static final EditOwnerDescriptor DESC_BOB;
+    public static final EditDogDescriptor DESC_ASHER;
+    public static final EditDogDescriptor DESC_BELL;
+    public static final EditProgramDescriptor DESC_PROGRAM_1;
+    public static final EditProgramDescriptor DESC_PROGRAM_2;
 
     static {
         DESC_AMY = new EditOwnerDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -101,6 +129,22 @@ public class CommandTestUtil {
         DESC_BOB = new EditOwnerDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+    }
+
+    static {
+        DESC_ASHER = new EditDogDescriptorBuilder().withName(VALID_NAME_ASHER).withBreed(VALID_BREED_ASHER)
+                .withDob(VALID_DATEOFBIRTH_ASHER).withSex(VALID_SEX_ASHER).withOwnerId(VALID_OWNERID_9)
+                .withTags(VALID_TAG_FRIENDLY).build();
+        DESC_BELL = new EditDogDescriptorBuilder().withName(VALID_NAME_BELL).withBreed(VALID_BREED_BELL)
+                .withDob(VALID_DATEOFBIRTH_BELL).withSex(VALID_SEX_BELL).withOwnerId(VALID_OWNERID_10)
+                .withTags(VALID_TAG_QUIET).build();
+    }
+
+    static {
+        DESC_PROGRAM_1 = new EditProgramDescriptorBuilder().withName(VALID_NAME_PROGRAM1)
+                .withSessions(VALID_SESSION_PROGRAM1).withTags(VALID_TAG_PUPPIES).build();
+        DESC_PROGRAM_2 = new EditProgramDescriptorBuilder().withName(VALID_NAME_PROGRAM2)
+                .withSessions(VALID_SESSION_PROGRAM2).withTags(VALID_TAG_DOGS).build();
     }
 
     /**
@@ -157,5 +201,4 @@ public class CommandTestUtil {
 
         assertEquals(1, model.getFilteredEntityList().size());
     }
-
 }
