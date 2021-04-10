@@ -8,9 +8,6 @@ import static java.util.Objects.requireNonNull;
 import dog.pawbook.logic.commands.exceptions.CommandException;
 import dog.pawbook.model.Model;
 import dog.pawbook.model.managedentity.Entity;
-import dog.pawbook.model.managedentity.dog.Dog;
-import dog.pawbook.model.managedentity.owner.Owner;
-import dog.pawbook.model.managedentity.program.Program;
 
 public abstract class DeleteCommand<T extends Entity> extends Command {
     public static final String COMMAND_WORD = "delete";

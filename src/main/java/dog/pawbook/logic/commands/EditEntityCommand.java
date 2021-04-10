@@ -1,7 +1,15 @@
 package dog.pawbook.logic.commands;
 
 import static dog.pawbook.commons.util.CollectionUtil.requireAllNonNull;
-import static dog.pawbook.logic.parser.CliSyntax.*;
+import static dog.pawbook.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static dog.pawbook.logic.parser.CliSyntax.PREFIX_BREED;
+import static dog.pawbook.logic.parser.CliSyntax.PREFIX_DOB;
+import static dog.pawbook.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static dog.pawbook.logic.parser.CliSyntax.PREFIX_NAME;
+import static dog.pawbook.logic.parser.CliSyntax.PREFIX_OWNERID;
+import static dog.pawbook.logic.parser.CliSyntax.PREFIX_PHONE;
+import static dog.pawbook.logic.parser.CliSyntax.PREFIX_SESSION;
+import static dog.pawbook.logic.parser.CliSyntax.PREFIX_SEX;
 import static dog.pawbook.logic.parser.CliSyntax.PREFIX_TAG;
 import static java.util.Objects.requireNonNull;
 
@@ -16,9 +24,6 @@ import dog.pawbook.model.Model;
 import dog.pawbook.model.managedentity.Entity;
 import dog.pawbook.model.managedentity.IdMatchPredicate;
 import dog.pawbook.model.managedentity.Name;
-import dog.pawbook.model.managedentity.dog.Dog;
-import dog.pawbook.model.managedentity.owner.Owner;
-import dog.pawbook.model.managedentity.program.Program;
 import dog.pawbook.model.managedentity.tag.Tag;
 
 /**
