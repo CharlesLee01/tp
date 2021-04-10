@@ -14,14 +14,15 @@ import dog.pawbook.model.managedentity.owner.Owner;
  * Adds a owner to the database.
  */
 public class AddOwnerCommand extends AddCommand<Owner> {
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a owner to the database. \n"
-            + "Parameters: "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds owner to the database. \n"
+            + "Parameters:\n"
+            + "1) " + PREFIX_NAME + "OWNER_NAME "
+            + PREFIX_PHONE + "PHONE_NUMBER "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " " + ENTITY_WORD + " "
+            + "Example:\n"
+            + "1) " + COMMAND_WORD + " " + ENTITY_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "

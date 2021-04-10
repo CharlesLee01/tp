@@ -12,10 +12,11 @@ import dog.pawbook.model.managedentity.ProgramOccursOnDatePredicate;
 public class ScheduleCommand extends Command {
     public static final String COMMAND_WORD = "schedule";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Displays all programs on for the day or a given date."
-            + "\n"
-            + "Parameters: [DATE]...\n"
-            + "Example: " + COMMAND_WORD + " 01-04-2021";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Displays all programs of the day or a given date.\n"
+            + "Parameters:\n"
+            + "1) [DATE]\n"
+            + "Example:\n"
+            + "1) " + COMMAND_WORD + " 01-04-2021";
 
     public static final String MESSAGE_SUCCESS = "Here's your schedule!";
 

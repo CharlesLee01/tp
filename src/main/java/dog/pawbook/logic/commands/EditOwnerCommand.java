@@ -25,13 +25,14 @@ public class EditOwnerCommand extends EditEntityCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the " + Owner.ENTITY_WORD
             + " identified by the ID number. "
             + "Existing values will be overwritten by the input values.\n"
-            + "ID (must be a positive integer) "
+            + "Parameters:\n 1) ID (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " " + Owner.ENTITY_WORD + " 1 "
+            + "Example:\n"
+            + "1) " + COMMAND_WORD + " " + Owner.ENTITY_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 

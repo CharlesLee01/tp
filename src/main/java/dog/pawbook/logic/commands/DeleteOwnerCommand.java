@@ -21,8 +21,9 @@ public class DeleteOwnerCommand extends DeleteCommand<Owner> {
 
     public static final String MESSAGE_USAGE =
             COMMAND_WORD + ": Deletes the owner identified by ID.\n"
-            + "Parameters: ID (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " " + ENTITY_WORD + " 1";
+            + "Parameters:\n 1) ID (must be a positive integer)\n"
+            + "Example:\n"
+            + "1) " + COMMAND_WORD + " " + ENTITY_WORD + " 1";
 
     public static final String MESSAGE_SUCCESS = String.format(MESSAGE_DELETE_SUCCESS_FORMAT, ENTITY_WORD);
 

@@ -21,11 +21,12 @@ public class EditProgramCommand extends EditEntityCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the " + Program.ENTITY_WORD
             + " identified by the ID number. "
             + "Existing values will be overwritten by the input values.\n"
-            + "ID (must be a positive integer) "
+            + "Parameters:\n 1) ID (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_SESSION + "DATE&TIME OF SESSION]... "
+            + "[" + PREFIX_SESSION + "SESSION]... "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " " + Program.ENTITY_WORD + " 100 "
+            + "Example:\n"
+            + "1) " + COMMAND_WORD + " " + Program.ENTITY_WORD + " 100 "
             + PREFIX_NAME + "Obedience Training "
             + PREFIX_SESSION + "01-02-2021 18:00 "
             + PREFIX_SESSION + "08-02-2021 18:00";

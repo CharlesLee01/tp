@@ -9,11 +9,21 @@ import java.util.Set;
 public class EnrolCommand extends ProgramRegistrationCommand {
     public static final String COMMAND_WORD = "enrol";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Enrols a dog into a program."
-            + " Parameters: "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Enrols a dog into a program.\n"
+            + "Parameters:\n"
+            + "1) Enrolling multiple dogs into one program: "
             + PREFIX_DOGID + "DOG_ID "
-            + PREFIX_PROGRAMID + "PROGRAM_ID...\n"
-            + "Example: " + COMMAND_WORD + " d/2 p/3";
+            + "[" + PREFIX_DOGID + "DOG_ID]... "
+            + PREFIX_PROGRAMID + "PROGRAM_ID\n"
+            + "2) Enrolling one dog into multiple programs: "
+            + PREFIX_DOGID + "DOG_ID "
+            + PREFIX_PROGRAMID + "PROGRAM_ID "
+            + "[" + PREFIX_PROGRAMID + "PROGRAM_ID]...\n"
+            + "Examples:\n"
+            + "1) " + COMMAND_WORD + " d/2 p/3\n"
+            + "2) " + COMMAND_WORD + " d/2 d/3 p/4\n"
+            + "3) " + COMMAND_WORD + " d/2 p/3 p/4\n";
+
 
     public static final String MESSAGE_SUCCESS_FORMAT = "Dog %s enrolled in program %s!";
 

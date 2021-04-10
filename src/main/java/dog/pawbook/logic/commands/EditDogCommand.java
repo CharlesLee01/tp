@@ -31,14 +31,15 @@ public class EditDogCommand extends EditEntityCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the " + Dog.ENTITY_WORD
             + " identified by the ID number. "
             + "Existing values will be overwritten by the input values.\n"
-            + "ID (must be a positive integer) "
+            + "Parameters:\n 1) ID (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_BREED + "BREED] "
             + "[" + PREFIX_DOB + "DATE OF BIRTH] "
             + "[" + PREFIX_SEX + "SEX] "
             + "[" + PREFIX_OWNERID + "OWNER ID] "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " " + Dog.ENTITY_WORD + " 1 "
+            + "Example:\n"
+            + "1) " + COMMAND_WORD + " " + Dog.ENTITY_WORD + " 1 "
             + PREFIX_NAME + "Bruce "
             + PREFIX_OWNERID + "10";
 
