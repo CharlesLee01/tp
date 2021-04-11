@@ -178,12 +178,17 @@ Below is an example activity diagram for a valid add command from the user.
 Below is an example activity diagram for a valid delete command from the user.
 
 ![DeleteActivityDiagram](diagrams/DeleteActivityDiagram.puml)
+
 ### Edit feature
 Pawbook allows the user to `edit` an entity. For instance, the user may want to `edit`  some features of an owner. By entering the edit command with the correct identification number of the owner to be edited, the specified features of the owner will be modified accordingly.
 
 In order to generate the respective commands, the raw input needs to be parsed first. It is required that the user provide a second keyword right after the `edit` command keyword to indicate the correct entity type to be edited. Using this information, the arguments can be forwarded to the correct parser from within `PawbookParser` to be further processed.
 
-Below is an example activitiy diagram for a valid view command from the user.
+Below is an example sequence diagram for a valid edit command from the user.
+
+![EditSequenceDiagram](images/EditSequenceDiagram.png)
+
+Below is an example activity diagram for a valid edit command from the user.
 
 ![EditActivityDiagram](images/EditActivityDiagram.png)
 
