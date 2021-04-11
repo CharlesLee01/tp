@@ -16,30 +16,30 @@ import dog.pawbook.logic.commands.exceptions.CommandException;
 import dog.pawbook.model.Model;
 import dog.pawbook.model.managedentity.Entity;
 import dog.pawbook.model.managedentity.IdMatchPredicate;
-import dog.pawbook.model.managedentity.dog.Dog;
-import dog.pawbook.model.managedentity.owner.Owner;
-import dog.pawbook.model.managedentity.program.Program;
 
 public abstract class AddCommand<T extends Entity> extends Command {
     public static final String COMMAND_WORD = "add";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a owner/dog/program to the database. \n"
-            + "Example for Owner: " + COMMAND_WORD + " " + Owner.ENTITY_WORD + " "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds entity to the database. \n"
+            + "Parameters:\n"
+            + "1) For Owner: "
+            + PREFIX_NAME + "OWNER_NAME "
+            + PREFIX_PHONE + "PHONE_NUMBER "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example for Dog: " + COMMAND_WORD + " " + Dog.ENTITY_WORD + " "
-            + PREFIX_NAME + "NAME "
+            + "2) For Dog: "
+            + PREFIX_NAME + "DOG_NAME "
             + PREFIX_BREED + "BREED "
-            + PREFIX_DOB + "DATE OF BIRTH "
+            + PREFIX_DOB + "DATE_OF_BIRTH "
             + PREFIX_SEX + "SEX "
-            + PREFIX_OWNERID + "OWNER ID "
+            + PREFIX_OWNERID + "OWNER_ID "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example for Program: " + COMMAND_WORD + " " + Program.ENTITY_WORD + " "
-            + PREFIX_NAME + "NAME "
+            + "3) For Program: "
+            + PREFIX_NAME + "PROGRAM_NAME "
+            + PREFIX_SESSION + "SESSION "
             + "[" + PREFIX_SESSION + "SESSION]... "
             + "[" + PREFIX_TAG + "TAG]...";
+
     public static final String MESSAGE_SUCCESS_FORMAT = "New %s added: ";
 
     protected final T toAdd;

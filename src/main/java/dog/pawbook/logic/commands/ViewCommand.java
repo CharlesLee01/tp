@@ -29,8 +29,12 @@ public class ViewCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Views all related entities of the specified ID. \n"
-            + "Parameters: [ID]...\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Parameters:\n "
+            + "1) For Dog: 1\n"
+            + "2) For Owner: 2\n"
+            + "3) For Program: 3\n"
+            + "Example:\n"
+            + "1) " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_SUCCESS_FORMAT = "Viewing!";
 

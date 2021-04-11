@@ -8,19 +8,14 @@ import static java.util.Objects.requireNonNull;
 import dog.pawbook.logic.commands.exceptions.CommandException;
 import dog.pawbook.model.Model;
 import dog.pawbook.model.managedentity.Entity;
-import dog.pawbook.model.managedentity.dog.Dog;
-import dog.pawbook.model.managedentity.owner.Owner;
-import dog.pawbook.model.managedentity.program.Program;
 
 public abstract class DeleteCommand<T extends Entity> extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE =
-            COMMAND_WORD + ": Deletes the owner/dog/program identified by ID. \n"
-            + "Parameters: ID (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " " + Owner.ENTITY_WORD + " 1\n"
-            + "Example: " + COMMAND_WORD + " " + Dog.ENTITY_WORD + " 2\n"
-            + "Example: " + COMMAND_WORD + " " + Program.ENTITY_WORD + " 3";
+            COMMAND_WORD + ": Deletes the the entity identified by ID.\n"
+            + "Parameters:\n"
+            + "1) ID (must be a positive integer)\n";
 
     public static final String MESSAGE_DELETE_SUCCESS_FORMAT = "Deleted %s: ";
 

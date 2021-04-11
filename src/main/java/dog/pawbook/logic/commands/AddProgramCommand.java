@@ -9,14 +9,16 @@ import dog.pawbook.model.managedentity.program.Program;
 
 public class AddProgramCommand extends AddCommand<Program> {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds program to the database. \n"
-        + "Parameters: "
-        + PREFIX_NAME + "NAME "
-        + "[" + PREFIX_SESSION + "DATE&TIME OF SESSION]... "
-        + "[" + PREFIX_TAG + "TAG]...\n"
-        + "Example: " + COMMAND_WORD + " " + ENTITY_WORD + " "
-        + PREFIX_NAME + "Obedience Training "
-        + PREFIX_SESSION + "01-02-2021 18:00 "
-        + PREFIX_TAG + "puppies";
+            + "Parameters:\n"
+            + "1) " + PREFIX_NAME + "PROGRAM_NAME "
+            + PREFIX_SESSION + "SESSION "
+            + "[" + PREFIX_SESSION + "SESSION]... "
+            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "Example:\n"
+            + "1) " + COMMAND_WORD + " " + ENTITY_WORD + " "
+            + PREFIX_NAME + "Obedience Training "
+            + PREFIX_SESSION + "01-02-2021 18:00 "
+            + PREFIX_TAG + "puppies";
 
     public static final String MESSAGE_SUCCESS = String.format(MESSAGE_SUCCESS_FORMAT, ENTITY_WORD);
     public static final String MESSAGE_DUPLICATE_PROGRAM = "This " + ENTITY_WORD + " already exists in Pawbook.";
